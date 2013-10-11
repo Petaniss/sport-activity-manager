@@ -57,7 +57,7 @@ public class UserDAOImplTest {
         try{ 
             userDao.create(user);
             fail("Create was called with null User");
-       }catch(IllegalArgumentException ex){}
+       }catch(NullPointerException ex){}
     }
     
     /*
@@ -246,7 +246,7 @@ public class UserDAOImplTest {
             userDao.update(null);
             fail("There is possible to update NULL user");
         }
-        catch(IllegalArgumentException ex){}
+        catch(NullPointerException ex){}
    }
     
     /**
@@ -263,7 +263,7 @@ public class UserDAOImplTest {
         try{
             userDao.delete(null);
             fail("There is possible to delete NULL user");
-        }catch(IllegalArgumentException ex){}
+        }catch(NullPointerException ex){}
         
         User user1 = new User();
         
