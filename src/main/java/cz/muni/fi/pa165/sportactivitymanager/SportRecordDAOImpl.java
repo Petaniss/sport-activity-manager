@@ -14,7 +14,8 @@ import javax.persistence.EntityManagerFactory;
  */
 public class SportRecordDAOImpl implements SportRecordDAO {
 
-    EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = null;
+    private EntityManager em = null;
 //    public SportRecordDAOImpl() {
 //    }
 
@@ -24,13 +25,13 @@ public class SportRecordDAOImpl implements SportRecordDAO {
             throw new NullPointerException();
         }
         this.emf = emf;
+        em = emf.createEntityManager();
     }
 
     public void create(SportRecord sportRecord) {
         if (sportRecord == null) {
             throw new NullPointerException();
         }
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(sportRecord);
         em.getTransaction().commit();
@@ -40,7 +41,6 @@ public class SportRecordDAOImpl implements SportRecordDAO {
         if (id == null) {
             throw new NullPointerException();
         }
-        EntityManager em = emf.createEntityManager();
         return em.find(SportRecord.class, id);
     }
     
@@ -48,42 +48,39 @@ public class SportRecordDAOImpl implements SportRecordDAO {
         if (sportRecord == null)
             throw new NullPointerException(); 
         
-        delete(sportRecord.getId());
+        this.delete(sportRecord.getId());
     }
     
-    public void delete(Long id) {
+        public void delete(Long id) {
         if (id == null)
             throw new NullPointerException(); 
         
-        EntityManager em = emf.createEntityManager();
-        SportRecord srDel = em.find(SportRecord.class, id);
+        SportRecord toDelete = em.find(SportRecord.class, id);
         
-        if (srDel == null)
-            throw new IllegalArgumentException("This entity does not exist in database.");
+        if (toDelete == null)
+            throw new IllegalArgumentException("this entity does not exist in database.");
         
         em.getTransaction().begin();
-        em.remove(srDel);
+        em.remove(toDelete);
         em.getTransaction().commit();
     }
+    
     
 
     public void update(SportRecord sportRecord) {
         if (sportRecord == null) {
             throw new NullPointerException();
         }
-        EntityManager em = emf.createEntityManager();
         SportRecord srUpd = em.find(SportRecord.class, sportRecord.getId());
         if (srUpd == null) {
             throw new IllegalArgumentException("This entity does not exist in database.");
-        }
-    
+        }    
         em.getTransaction().begin();
         em.persist(sportRecord);
         em.getTransaction().commit();
     }
 
     public List<SportRecord> findAll() {
-        EntityManager em = emf.createEntityManager();
         return em.createNamedQuery("findAllSportRecord", SportRecord.class)
                 .getResultList();
     }
