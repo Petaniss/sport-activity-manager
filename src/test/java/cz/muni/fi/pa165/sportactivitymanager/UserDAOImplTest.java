@@ -65,6 +65,7 @@ public class UserDAOImplTest {
      * Then assertNotNull tests, whether id isn't null
      * Then assertSame/assertEquals tests, whether created object and object returned by Get method refer to the same object/are same.  
      * if not than throw Error
+     * 
      */
     @Test
     public void testCreate(){
