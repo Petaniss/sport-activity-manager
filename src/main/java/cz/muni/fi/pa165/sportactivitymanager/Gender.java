@@ -10,6 +10,7 @@ package cz.muni.fi.pa165.sportactivitymanager;
  * @author Dobes Kuba
  */
 //TODO vytvořil jsem jen proto aby mi nechybovali ostatni tridy
+//DONE : Adam Brauner 
 public enum Gender {
     MALE, FEMALE;
 }

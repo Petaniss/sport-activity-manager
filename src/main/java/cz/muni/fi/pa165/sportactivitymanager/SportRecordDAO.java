@@ -9,43 +9,53 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Phaser
+ * @author Adam Brauner
  */
 public interface SportRecordDAO {
      /**
-     * Creates new User
+     * Creates new SportRecord
      * 
      * @param sportRecord SportRecord that we store.
-     * @throws IllegalArgumentException when argument is not instance of SportRecord class. 
+     * @throws NullPointerException when argument is Null. 
      * @return nothing.
      */
     void create(SportRecord sportRecord);
     
     /**
-     * Find existing User
+     * Find existing SportRecord
      * 
      * @param id is ID of SportRecord that we want get.
-     * @throws IllegalArgumentException when ID is NULL. 
+     * @throws NullPointerException when ID is NULL. 
      * @return SportRecord with same id, or Null when SportRecord does not exist.
      */
-    User getSportRecord(Long id);
+    SportRecord getSportRecord(Long id);
     
     /**
      * Delete existing SportRecord
      * 
      * @param sportRecord is a sportRecord that we want to delete.
      * @throws IlleagalArgumentException when given sportRecord does not exist.
-     * @throws NullPointerException when given sportRecord is not in DB.
+     * @throws NullPointerException when given null.
      * @return nothing
      */
     void delete(SportRecord sportRecord);
+    
+     /**
+     * Delete existing SportRecord
+     * 
+     * @param id is a id of sportRecord that we want to delete.
+     * @throws IlleagalArgumentException when given sportRecord does not exist.
+     * @throws NullPointerException when given null.
+     * @return nothing
+     */
+    void delete(Long id);
     
     /**
      * Update existing sportRecord
      * 
      * @param sportRecord is a sportRecord that we want to update.
      * @throws IlleagalArgumentException when given sportRecord does not exist.
-     * @throws NullPointerException when given sportRecord is not in DB.
+     * @throws NullPointerException when given null.
      * @return nothing
      */
     void update(SportRecord sportRecord);
@@ -56,14 +66,14 @@ public interface SportRecordDAO {
      * @param nothing
      * @return List of all SportRecord
      */
-    List<User> findAll();
+    List<SportRecord> findAll();
     
     
-    /**
-     * Sets EntityManagerFactory for using in this class
-     * 
-     * @param emf is instance of EntityManagerFactory
-     * @return nothing
-     */
-    void setEntityManagerFactory(EntityManagerFactory emf);
+//    /**
+//     * Sets EntityManagerFactory for using in this class
+//     * 
+//     * @param emf is instance of EntityManagerFactory
+//     * @return nothing
+//     */
+//    void setEntityManagerFactory(EntityManagerFactory emf);
 }

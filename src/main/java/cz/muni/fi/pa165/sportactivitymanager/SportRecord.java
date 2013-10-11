@@ -10,22 +10,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author Phaser
+ * @author Adam Brauner
  */
 @Entity
 @Table( name="sport_record" )
+@NamedQueries({
+   @NamedQuery(name="findAllSportRecord",
+                query = "SELECT sr FROM SportRecord sr"),
+})
 public class SportRecord implements Serializable {
     
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-   private Long id;
+   private Long id;   
    
+//   @ManyToOne
    private User user;
    //In seconds
    private Long duration;
@@ -33,7 +41,15 @@ public class SportRecord implements Serializable {
    //in meters
    private int distance;   
    @Temporal(TemporalType.TIME)
-   private Date StartTime;           
+   private Date StartTime;        
+   
+       public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;

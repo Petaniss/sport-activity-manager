@@ -5,10 +5,14 @@
 package cz.muni.fi.pa165.sportactivitymanager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +31,9 @@ public class User implements Serializable{
    private Integer weight;
    private Gender gender;
 
+    @OneToMany(mappedBy = "Athlete", cascade = CascadeType.ALL)
+    private List<SportRecord> sportRecord = new ArrayList<SportRecord>();
+   
     public Long getId() {
         return id;
     }
