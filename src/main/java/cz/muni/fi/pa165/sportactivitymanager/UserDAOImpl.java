@@ -6,42 +6,86 @@ package cz.muni.fi.pa165.sportactivitymanager;
 
 import cz.muni.fi.pa165.sportactivitymanager.User;
 import cz.muni.fi.pa165.sportactivitymanager.UserDAO;
+import java.util.Collections;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author tempest
- * //TODO
- * JEN PRO FUNKCNOST ostatnich trid, ale implementace neni nakodena
+ * @author Dobes Kuba
+ * 
  */
 class UserDAOImpl implements UserDAO {
 
+    private EntityManagerFactory entityManagerFactory;
+    
     public UserDAOImpl() {
     }
 
     public void create(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(user == null){
+            throw new NullPointerException("User is Null");
+        }
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
+        em.close();
     }
 
     public User getByID(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id == null){
+            throw new NullPointerException("User ID is Null");
+        }
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        User user = em.find(User.class, id);
+        em.getTransaction().commit();
+        em.close();
+        return user;
     }
-
+    
     public void delete(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        if(user == null){
+            throw new NullPointerException("User is Null");
+        }
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        User user1 = em.find(User.class, user.getId());
+        em.remove(user1);
+        em.getTransaction().commit();
+        em.close();
+    }   
 
     public void update(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(user == null){
+            throw new NullPointerException("User is Null");
+        }
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(user);
+        em.getTransaction().commit();
+        em.close();
     }
 
     public List<User> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        EntityManager em = entityManagerFactory.createEntityManager();
+        List<User> list;
+        
+        em.getTransaction().begin();
+        list = em.createQuery("SELECT u from User u").getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return Collections.unmodifiableList(list);
     }
 
     public void setEntityManagerFactory(EntityManagerFactory emf) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(emf == null){
+            throw new NullPointerException("EntityManagerFactory is Null");
+        }
+        this.entityManagerFactory = emf;
     }
     
 }
