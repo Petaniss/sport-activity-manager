@@ -10,9 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,28 +22,25 @@ import javax.persistence.TemporalType;
  * @author Adam Brauner
  */
 @Entity
-@Table( name="sport_record" )
+@Table(name = "sport_record")
 @NamedQueries({
-   @NamedQuery(name="findAllSportRecord",
-                query = "SELECT sr FROM SportRecord sr"),
-})
+    @NamedQuery(name = "findAllSportRecord",
+            query = "SELECT sr FROM SportRecord sr"),})
 public class SportRecord implements Serializable {
-    
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   private Long id;   
-   
-//   @ManyToOne
-   private User user;
-   //In seconds
-   private Long duration;
 
-   //in meters
-   private int distance;   
-   @Temporal(TemporalType.TIME)
-   private Date StartTime;        
-   
-       public Long getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @OneToOne
+    private User user;
+    //In seconds
+    private Long duration;
+    //in meters
+    private int distance;
+    @Temporal(TemporalType.TIME)
+    private Date StartTime;
+
+    public Long getId() {
         return id;
     }
 
@@ -82,8 +79,7 @@ public class SportRecord implements Serializable {
     public void setStartTime(Date StartTime) {
         this.StartTime = StartTime;
     }
-   
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -106,5 +102,4 @@ public class SportRecord implements Serializable {
         }
         return true;
     }
-    
 }

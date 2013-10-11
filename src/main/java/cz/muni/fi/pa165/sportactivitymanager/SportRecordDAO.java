@@ -5,7 +5,6 @@
 package cz.muni.fi.pa165.sportactivitymanager;
 
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -66,14 +65,7 @@ public interface SportRecordDAO {
      * @param nothing
      * @return List of all SportRecord
      */
-    List<SportRecord> findAll();
+    List<SportRecord> findAll();    
     
-    
-//    /**
-//     * Sets EntityManagerFactory for using in this class
-//     * 
-//     * @param emf is instance of EntityManagerFactory
-//     * @return nothing
-//     */
-//    void setEntityManagerFactory(EntityManagerFactory emf);
+
 }
