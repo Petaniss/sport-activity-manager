@@ -63,5 +63,31 @@ public class SportActivity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-  
+
+    @Override
+    public String toString() {
+        return "SportActivity{" + "id=" + id + ", name=" + name + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SportActivity other = (SportActivity) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
 }

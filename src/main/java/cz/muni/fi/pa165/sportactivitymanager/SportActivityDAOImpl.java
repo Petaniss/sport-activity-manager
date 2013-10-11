@@ -15,17 +15,18 @@ import javax.persistence.EntityManagerFactory;
 public class SportActivityDAOImpl implements SportActivityDAO {
     
     private EntityManagerFactory emf;
+    private EntityManager em;
 
     public SportActivityDAOImpl(EntityManagerFactory emf) {
         if (emf == null) throw new NullPointerException();
         this.emf = emf;
+        this.em = emf.createEntityManager();
     }
     
     public void create(SportActivity sportActivity) {
         if (sportActivity == null)
             throw new NullPointerException();
         
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(sportActivity);
         em.getTransaction().commit();
@@ -35,7 +36,6 @@ public class SportActivityDAOImpl implements SportActivityDAO {
         if (id == null)
             throw new NullPointerException();
         
-        EntityManager em = emf.createEntityManager();
         return em.find(SportActivity.class, id);
     }
 
@@ -45,7 +45,6 @@ public class SportActivityDAOImpl implements SportActivityDAO {
         if (name.length() == 0)
             throw new IllegalArgumentException();
         
-        EntityManager em = emf.createEntityManager();
         return em.createNamedQuery("findByName", SportActivity.class)
             .setParameter("name", name)
             .getSingleResult();
@@ -62,7 +61,6 @@ public class SportActivityDAOImpl implements SportActivityDAO {
         if (id == null)
             throw new NullPointerException(); 
         
-        EntityManager em = emf.createEntityManager();
         SportActivity toDelete = em.find(SportActivity.class, id);
         
         if (toDelete == null)
@@ -77,7 +75,6 @@ public class SportActivityDAOImpl implements SportActivityDAO {
         if (sportActivity == null)
             throw new NullPointerException();
         
-        EntityManager em = emf.createEntityManager();
         if (em.find(SportActivity.class, sportActivity.getId()) == null)
             throw new IllegalArgumentException("this entity does not exist in database");
         
@@ -87,7 +84,6 @@ public class SportActivityDAOImpl implements SportActivityDAO {
     }
 
     public List<SportActivity> findAll() {
-        EntityManager em = emf.createEntityManager();
         return em.createNamedQuery("findAll", SportActivity.class)
             .getResultList();
         
