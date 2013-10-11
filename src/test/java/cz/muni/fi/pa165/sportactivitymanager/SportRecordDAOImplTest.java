@@ -26,7 +26,7 @@ public class SportRecordDAOImplTest {
 
     @Before
     public void SetUp() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Sport");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("SportActivityTestInMemory-PU");
         sportRecordDAO = new SportRecordDAOImpl(emf);
     }
 
