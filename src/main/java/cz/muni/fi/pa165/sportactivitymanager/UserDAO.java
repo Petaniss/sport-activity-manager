@@ -57,14 +57,5 @@ public interface UserDAO {
      * @return List of all Users
      */
     List<User> findAll();
-    
-    
-    /**
-     * Sets EntityManagerFactory for using in this class
-     * 
-     * @param emf is instance of EntityManagerFactory
-     * @return nothing
-     */
-    void setEntityManagerFactory(EntityManagerFactory emf);
-        
+   
 }

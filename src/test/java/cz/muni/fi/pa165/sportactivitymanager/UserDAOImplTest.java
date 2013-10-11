@@ -25,9 +25,7 @@ public class UserDAOImplTest {
     @Before 
     public void SetUp(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Sport");
-        
-        userDao = new UserDAOImpl();
-        userDao.setEntityManagerFactory(emf);        
+        userDao = new UserDAOImpl(emf);
     }
     
     @After
@@ -142,11 +140,11 @@ public class UserDAOImplTest {
             userDao.getByID(null);
             fail("User id can not be Null");
         }
-        catch(IllegalArgumentException ex){}
+        catch(NullPointerException ex){}
         
         try{
             userDao.getByID(Long.valueOf("-1"));
-            fail();
+            fail("ID was set to negative number");
         }
         catch(IllegalArgumentException ex){}
      }
