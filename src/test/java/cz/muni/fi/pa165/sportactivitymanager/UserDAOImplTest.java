@@ -24,7 +24,7 @@ public class UserDAOImplTest {
   
     @Before 
     public void SetUp(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Sport");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("SportActivityTestInMemory-PU");
         userDao = new UserDAOImpl(emf);
     }
     
