@@ -4,8 +4,6 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager;
 
-import cz.muni.fi.pa165.sportactivitymanager.User;
-import cz.muni.fi.pa165.sportactivitymanager.UserDAO;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;

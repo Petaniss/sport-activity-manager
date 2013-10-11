@@ -24,7 +24,7 @@ public class UserDAOImplTest {
   
     @Before 
     public void SetUp(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("SportActivityTestInMemory-PU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Sport");
         
         userDao = new UserDAOImpl();
         userDao.setEntityManagerFactory(emf);        
@@ -35,7 +35,7 @@ public class UserDAOImplTest {
     }
     
     /*
-     * Try create new Empty user1 
+     * Try create new Empty user 
      */
     @Test
     public void testCreateEmpty(){
@@ -61,7 +61,7 @@ public class UserDAOImplTest {
     }
     
     /*
-     * Try create new user1 
+     * Try create new user 
      * Then assertNotNull tests, whether id isn't null
      * Then assertSame/assertEquals tests, whether created object and object returned by Get method refer to the same object/are same.  
      * if not than throw Error
@@ -159,6 +159,7 @@ public class UserDAOImplTest {
      * Then assertEquals tests whether the list has right size
      * if not than throw Error
      */
+    @Test
     public void testFindAll() {
         System.out.println("test of findAll Users");
         
@@ -183,12 +184,10 @@ public class UserDAOImplTest {
         user1.setGender(Gender.MALE);
         user3.setLastName("Treti");
         
-        //create
         userDao.create(user1);
         userDao.create(user2);
         userDao.create(user3);
         
-        //test 
         List<User> UserList = userDao.findAll();
         
         assertTrue(UserList.contains(user1));
