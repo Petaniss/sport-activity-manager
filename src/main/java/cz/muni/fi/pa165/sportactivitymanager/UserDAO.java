@@ -24,11 +24,11 @@ public interface UserDAO {
     /**
      * Find existing User
      * 
-     * @param id is ID of User that we want get.
+     * @param id is ID of User that we want getByID.
      * @throws IllegalArgumentException when ID is NULL. 
      * @return User with same id, or Null when user does not exist.
      */
-    User get(Long id);
+    User getByID(Long id);
     
     /**
      * Delete existing User

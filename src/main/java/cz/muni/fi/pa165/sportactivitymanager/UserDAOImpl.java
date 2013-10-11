@@ -12,7 +12,7 @@ import javax.persistence.EntityManagerFactory;
 /**
  *
  * @author tempest
- * TODD
+ * //TODO
  * JEN PRO FUNKCNOST ostatnich trid, ale implementace neni nakodena
  */
 class UserDAOImpl implements UserDAO {
@@ -24,7 +24,7 @@ class UserDAOImpl implements UserDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public User get(Long id) {
+    public User getByID(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

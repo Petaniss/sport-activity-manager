@@ -5,15 +5,13 @@
 package cz.muni.fi.pa165.sportactivitymanager;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -22,18 +20,17 @@ import javax.persistence.Table;
 @Entity
 @Table( name="Athlete" )
 public class User implements Serializable{
+   private static final long serialVersionUID = 1L;
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
    private String firstName;
    private String lastName;
-   private Integer age; 
+   @Temporal(javax.persistence.TemporalType.DATE)
+   private Date birthDay; 
    private Integer weight;
    private Gender gender;
 
-    @OneToMany(mappedBy = "Athlete", cascade = CascadeType.ALL)
-    private List<SportRecord> sportRecord = new ArrayList<SportRecord>();
-   
     public Long getId() {
         return id;
     }
@@ -66,12 +63,12 @@ public class User implements Serializable{
         this.gender = gender;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
     }
 
-    public Integer getAge() {
-        return age;
+    public Date getBirthDay() {
+        return birthDay;
     }
 
     public void setFirstName(String firstName) {
@@ -103,7 +100,10 @@ public class User implements Serializable{
     
     @Override
     public String toString() {
-        return "cz.muni.fi.pa165.sportactivitymanager.User[ id=" + id + " ]";
+        return "User name = " + firstName + lastName + 
+               ", id= " + id +
+               ", gender= " + gender + 
+               ", Birdthday= " + birthDay ;
     }
     
 }

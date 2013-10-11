@@ -4,6 +4,9 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager;
 
+import static cz.muni.fi.pa165.sportactivitymanager.UserDAOImplTest.AssertUserCompletely;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -15,8 +18,6 @@ import static org.junit.Assert.*;
  *
  * @author Dobes Kuba
  */
-
-//TODO findTEST...
 public class UserDAOImplTest {
     private UserDAO userDao;
     
@@ -27,13 +28,15 @@ public class UserDAOImplTest {
         
         userDao = new UserDAOImpl();
         userDao.setEntityManagerFactory(emf);        
-
     }
     
     @After
     public void tearDown(){
     }
     
+    /*
+     * Try create new Empty user1 
+     */
     @Test
     public void testCreateEmpty(){
        User user = new User();
@@ -44,24 +47,34 @@ public class UserDAOImplTest {
         }
     }
     
-   
+    /*
+     * Try create new Null user1
+     */
     @Test
     public void testCreateNullUser(){
-       User user = null;
-       try{ 
+        User user = null;
+        
+        try{ 
             userDao.create(user);
             fail("Create was called with null User");
        }catch(IllegalArgumentException ex){}
     }
     
+    /*
+     * Try create new user1 
+     * Then assertNotNull tests, whether id isn't null
+     * Then assertSame/assertEquals tests, whether created object and object returned by Get method refer to the same object/are same.  
+     * if not than throw Error
+     */
     @Test
     public void testCreate(){
        User user = new User();
        
-       user.setAge(12);
+       Date birthD3 = new Date(100, 10, 20);
+       user.setBirthDay(birthD3);
        user.setFirstName("Matin");
        user.setLastName("Hajanek");
-      // user.setGender();
+       user.setGender(Gender.MALE);
        user.setWeight(57);
        
        userDao.create(user);
@@ -70,63 +83,214 @@ public class UserDAOImplTest {
        assertNotNull(user.getId());
        Long userId = user.getId();
        
-       User user2fromDB = userDao.get(userId);
+       User user2fromDB = userDao.getByID(userId);
        //are two objects equal?
        assertEquals(user, user2fromDB);
        //refer two object to the same object?
-       assertSame(user, user2fromDB);
-       
-       assertEquals(user.getAge(), user2fromDB.getAge());
-       assertEquals(user.getGender(), user2fromDB.getGender());
-       assertEquals(user.getId(), user2fromDB.getId());
-       assertEquals(user.getLastName(), user2fromDB.getLastName());
-       assertEquals(user.getWeight(), user2fromDB.getWeight());
+       assertSame(user, user2fromDB);       
+       AssertUserCompletely(user,user2fromDB);
     }
-    
+ 
+    /**
+     * Test of Get method, of User class
+     *
+     * Create 2 new users.
+     * Then assertEquals tests, whether created object and object returned by Get method are same and has same ID.  
+     * Then conditional if tests, whether 2 users with same attributes has same ID, but could not have.
+     * Then assertSame test whether 2 object are same.
+     * AssertUserCompletely tests whether attributes of 2 objects are same. 
+     * if not than throw Error
+     * 
+     * Than try get user1 with Null id, and negative id
+     */    
     @Test
     public void testGet(){
         User user1 = new User();
         User user2 = new User();
         
-        user1.setAge(21);
+        Date birthD1 = new Date(90, 3, 20);
+        user1.setBirthDay(birthD1);
         user1.setFirstName("Brona");
         user1.setLastName("Kocu");
         user1.setWeight(120);
-        //user1.setGender(null);
+        user1.setGender(Gender.MALE);
         
-        user2.setAge(21);
+        Date birthD2 = new Date(90, 3, 20);
+        user2.setBirthDay(birthD2);
         user2.setFirstName("Brona");
         user2.setLastName("Kocu");
         user2.setWeight(120);
-        //user2.setGender(null);
+        user2.setGender(Gender.MALE);
         
         userDao.create(user1);
         userDao.create(user2);
         
-        User getUserformDB = userDao.get(user1.getId());
+        assertEquals(user1, userDao.getByID(user1.getId()));
+        assertEquals(user2, userDao.getByID(user2.getId()));
         
-        //id check  
+        User getUserformDB = userDao.getByID(user1.getId());
+        //id check test 
         assertEquals(getUserformDB.getId(), user1.getId());
-        if(getUserformDB.getId().equals(user2.getId()))fail("Two people with same atributes has same ID, but could not have.");
-        assertNotSame(getUserformDB, user1);
+                
+        if(getUserformDB.getId().equals(user2.getId()))fail("Two different people with same atributes has same ID, but could not have.");
+        assertSame(getUserformDB, user1);
         
-        //prepras do 1 metody
-        assertEquals(user1.getAge(), getUserformDB.getAge());
-        assertEquals(user1.getGender(), getUserformDB.getGender());
-        assertEquals(user1.getId(), getUserformDB.getId());
-        assertEquals(user1.getLastName(), getUserformDB.getLastName());
-        assertEquals(user1.getWeight(), getUserformDB.getWeight());
-       
-        try
-        {
-            userDao.get(null);
-            fail("Plane id can not be Null");
+        AssertUserCompletely(user1,getUserformDB);
+               
+        try{
+            userDao.getByID(null);
+            fail("User id can not be Null");
+        }
+        catch(IllegalArgumentException ex){}
+        
+        try{
+            userDao.getByID(Long.valueOf("-1"));
+            fail();
+        }
+        catch(IllegalArgumentException ex){}
+     }
+    
+    /**
+     * Test of findAll method, of User class
+     *
+     * Create 3 new users.
+     * Then tests findAll method, that should return all 3 object into List
+     * Then assertTrue tests whether List contains all 3 users. 
+     * Then assertEquals tests whether the list has right size
+     * if not than throw Error
+     */
+    public void testFindAll() {
+        System.out.println("test of findAll Users");
+        
+        User user1 = new User();
+        Date birthD = new Date(89, 20, 10);
+        user1.setBirthDay(birthD);
+        user1.setFirstName("Kuba");
+        user1.setGender(Gender.MALE);
+        user1.setLastName("Dobe");
+        
+        User user2 = new User();
+        Date birthD2 = new Date(89, 20, 10);
+        user2.setBirthDay(birthD2);
+        user2.setFirstName("Premysl Otakar");
+        user1.setGender(Gender.MALE);
+        user2.setLastName("Druhy");
+        
+        User user3 = new User();
+        Date birthD3 = new Date(89, 20, 10);
+        user3.setBirthDay(birthD3);
+        user3.setFirstName("Vaclav");
+        user1.setGender(Gender.MALE);
+        user3.setLastName("Treti");
+        
+        //create
+        userDao.create(user1);
+        userDao.create(user2);
+        userDao.create(user3);
+        
+        //test 
+        List<User> UserList = userDao.findAll();
+        
+        assertTrue(UserList.contains(user1));
+        assertTrue(UserList.contains(user2));
+        assertTrue(UserList.contains(user3));
+        
+        long listSize = UserList.size();
+        assertEquals(3, listSize);
+        
+        User user1fromList = UserList.get(0);
+        AssertUserCompletely(user1,user1fromList);
+                
+        User user2fromList = UserList.get(1);
+        AssertUserCompletely(user2,user2fromList);
+        
+        User user3fromList = UserList.get(2);
+        AssertUserCompletely(user3,user3fromList);
+     }
+    
+    /**
+     * Test of Update method, that should update information about user1
+     *  
+     * Create new user1, then update his attributes 
+     * Than assertEqual tests whether object and his attributes are same , 
+     * if aren't than throw Error
+     * 
+     * Try update null user1
+     */
+    @Test
+    public void testUpdate()
+    {
+        User user1 = new User();
+        
+        Date birthD1 = new Date(90, 3, 20);
+        user1.setBirthDay(birthD1);
+        user1.setFirstName("Brona");
+        user1.setLastName("Stary");
+        user1.setWeight(120);
+        user1.setGender(Gender.MALE);
+        
+        userDao.create(user1);
+        
+        Date birthD2 = new Date(89, 3, 20);
+        user1.setBirthDay(birthD2);
+        user1.setFirstName("Honza");
+        user1.setLastName("Novy");
+        user1.setWeight(82);
+        user1.setGender(Gender.MALE);
+        
+        userDao.update(user1);
+        assertNotNull(user1.getId());        
+        User userFromDB = userDao.getByID(user1.getId());
+        AssertUserCompletely(user1,userFromDB);
+        
+        try{
+            userDao.update(null);
+            fail("There is possible to update NULL user");
+        }
+        catch(IllegalArgumentException ex){}
+   }
+    
+    /**
+     * Test of Delete method, that should remove user1 
+     * Try delete Null user1. 
+     * Then create new regular user1. 
+     * Then delete that user1 
+     * and assertNull tests whether object is really Null, 
+     * if isn't than throw Error
+     */
+    @Test
+    public void TestDelete()
+    {
+        try{
+            userDao.delete(null);
+            fail("There is possible to delete NULL user");
         }catch(IllegalArgumentException ex){}
-     
         
-        //TODO findTEST...
+        User user1 = new User();
+        
+        Date birthD1 = new Date(90, 3, 20);
+        user1.setBirthDay(birthD1);
+        user1.setFirstName("Brona");
+        user1.setLastName("Stary");
+        user1.setWeight(120);
+        user1.setGender(Gender.MALE);
+        
+        userDao.create(user1);
+        assertNotNull(userDao.getByID(user1.getId()));
+        userDao.delete(user1);
+        assertNull(userDao.getByID(user1.getId()));
+      }
+    
+    /**
+     * Method for comparison information of 2 users that should be same
+     * throw Error when aren't same
+     */
+    public static void AssertUserCompletely(User user1, User user2){
+        assertEquals(user1.getBirthDay(),user2.getBirthDay());
+        assertEquals(user1.getGender(), user2.getGender());
+        assertEquals(user1.getId(), user2.getId());
+        assertEquals(user1.getLastName(), user2.getLastName());
+        assertEquals(user1.getWeight(), user2.getWeight());
     }
-    
-    
-    
-}   
+
+}
