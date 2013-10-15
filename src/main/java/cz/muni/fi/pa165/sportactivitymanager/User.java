@@ -101,9 +101,9 @@ public class User implements Serializable{
     @Override
     public String toString() {
         return "User name = " + firstName + lastName + 
-               ", id= " + id +
-               ", gender= " + gender + 
-               ", Birdthday= " + birthDay ;
+               ", id = " + id +
+               ", gender = " + gender + 
+               ", Birdthday = " + birthDay ;
     }
     
 }
