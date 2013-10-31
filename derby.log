@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Sat Oct 12 00:36:34 CEST 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0141-a9aa-06e9-000004015390 
-on database directory memory:C:\Users\tempest\Documents\NetBeansProjects\sport-activity-manager\unit-testing-jpa  with class loader sun.misc.Launcher$AppClassLoader@46fb3d6 
+Thu Oct 31 21:37:00 CET 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0142-103b-ba3d-000002e56998 
+on database directory memory:C:\Users\tempest\Documents\NetBeansProjects\sport-activity-manager\unit-testing-jpa  with class loader sun.misc.Launcher$AppClassLoader@4187a8e0 
 Loaded from file:/C:/Users/tempest/.m2/repository/org/apache/derby/derby/10.9.1.0/derby-10.9.1.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_40-b43
