@@ -4,11 +4,14 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
- * @author tempest
+ * @author Dobes KUba
  */
-//TODO
+
 public class UserDTOChanger {
   
     //convert userDTO to Entity User
@@ -39,7 +42,15 @@ public class UserDTOChanger {
         userDto.setWeight(user.getWeight());
         return userDto;
     }
-
-    //TODO
+  
+    public static List<UserDTO> entityListToDtoList( List<User> users ) {
+        if(users == null) return null;
+        
+        List<UserDTO> userDtoList =  new ArrayList<UserDTO>();
+        for(int i = 0; i<users.size(); i++){
+            userDtoList.add(UserDTOChanger.entityToDTO(users.get(i)));
+        }
+        return userDtoList;
+    }
 
 }
