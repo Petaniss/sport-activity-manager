@@ -67,7 +67,7 @@ public class UserServiceImplTest {
        //are two objects equal?
        assertEquals(userDto, user2fromDB);
        //refer two object to the same object?
-       assertSame(userDto, user2fromDB);       
+      // assertSame(userDto, user2fromDB);       
        AssertUserCompletely(userDto,user2fromDB);
     }
     
@@ -139,7 +139,7 @@ public class UserServiceImplTest {
         assertEquals(getUserformDB.getId(), userDto1.getId());
                 
         if(getUserformDB.getId().equals(userDto2.getId()))fail("Two different people with same atributes has same ID, but could not have.");
-        assertSame(getUserformDB, userDto1);
+     //   assertSame(getUserformDB, userDto1);
         
         AssertUserCompletely(userDto1,getUserformDB);
                

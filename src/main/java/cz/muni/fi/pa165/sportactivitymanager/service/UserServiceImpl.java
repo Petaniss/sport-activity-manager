@@ -48,6 +48,8 @@ public class UserServiceImpl implements UserService{
     }
 
     public UserDTO getByID(Long id) {
+        //if(id<0)
+        
         UserDTO userDto = null;
        
         if(id != null){  

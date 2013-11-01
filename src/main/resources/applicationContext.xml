@@ -29,11 +29,11 @@
  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
      
- <bean id="userDao" class="cz.muni.fi.pa165.sportactivitymanager.UserDAOImpl">
+ <bean id="userDao" class="cz.muni.fi.pa165.sportactivitymanager.dao.impl.UserDAOImpl">
  </bean>
  
  <bean id="userService" class="cz.muni.fi.pa165.sportactivitymanager.services.UserServiceImpl">
-     <property name="userDao" ref="userDao"/>
+     <property name="uDao" ref="userDao"/>
  </bean>
  
 <!--    

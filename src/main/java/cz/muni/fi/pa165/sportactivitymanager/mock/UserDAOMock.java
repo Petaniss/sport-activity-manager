@@ -38,6 +38,10 @@ public class UserDAOMock implements UserDAO{
     if (id == null) {
             throw new NullPointerException("User ID is null ");
         }
+    if (id < 0) {
+            throw new IllegalArgumentException("User ID is negative ");
+        }
+    
         for (User user : mockList) {
             if (user.getId().equals(id)) {
                 return user;
