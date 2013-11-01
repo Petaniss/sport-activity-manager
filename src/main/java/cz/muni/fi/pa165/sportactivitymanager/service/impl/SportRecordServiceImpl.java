@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager.service;
+package cz.muni.fi.pa165.sportactivitymanager.service.impl;
 
 import cz.muni.fi.pa165.sportactivitymanager.DataAccException;
 import cz.muni.fi.pa165.sportactivitymanager.SportRecord;
 import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTO;
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportRecordDAO;
 import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTOChanger;
+import cz.muni.fi.pa165.sportactivitymanager.service.SportRecordService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.dao.DataAccessException;

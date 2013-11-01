@@ -6,7 +6,7 @@ package cz.muni.fi.pa165.sportactivitymanager;
 
 import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTO;
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
-import cz.muni.fi.pa165.sportactivitymanager.service.SportRecordServiceImpl;
+import cz.muni.fi.pa165.sportactivitymanager.service.impl.SportRecordServiceImpl;
 import java.util.Date;
 import static org.junit.Assert.*;
 import org.junit.Before;
