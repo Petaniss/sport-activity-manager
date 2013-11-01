@@ -19,9 +19,12 @@ import java.util.List;
 
 public class UserDAOMock implements UserDAO{
 
-    private LinkedList mockList = mock(LinkedList<User>());
-  //  private List<User> mockList = new ArrayList<User>();
-    private long id = 0;
+   // dobry// private User mockUser = mock(User.class);
+  //  private LinkedList mockList = mock(LinkedList<User>());
+   //private List<User> mockList = new ArrayList<User>();
+    private List mockList = mock(List.class);
+    private UserDAO mockUserDAO = mock(UserDAO.class);
+   private long id = 0;
     
      // Dobes Kuba: vytvorim si list mockList a do nej pridam usera
      // v dalsich metodach pracuju jen s MOCKListem a ten prochazim a hledam odpovidajiciho usera
@@ -34,7 +37,8 @@ public class UserDAOMock implements UserDAO{
             user.setId(Long.valueOf(id));
             id++;
         }
-      mockList.add(user);
+        mockUserDAO.create(user);
+      //mockList.add(user);
     }
 
     public User getByID(Long id) {
@@ -45,11 +49,12 @@ public class UserDAOMock implements UserDAO{
             throw new IllegalArgumentException("User ID is negative ");
         }
     
-        for (User user : mockList) {
-            if (user.getId().equals(id)) {
-                return user;
-            }
-        }
+        mockUserDAO.getByID(id);
+//        for (User user : mockList) {
+//            if (user.getId().equals(id)) {
+//                return user;
+//            }
+//        }
         return null;
     }
 
@@ -57,30 +62,35 @@ public class UserDAOMock implements UserDAO{
     if (user == null) {
             throw new NullPointerException("User is Null");
         }
-        for (User u : mockList) {
-            if (u.getId().equals(user.getId())) {
-                mockList.remove(Integer.parseInt((u.getId()).toString())); //conversion Long (u.getid()) to Int
-            }
-        }   
+    
+        mockUserDAO.delete(user);
+//        for (User u : mockList) {
+//            if (u.getId().equals(user.getId())) {
+//                mockList.remove(Integer.parseInt((u.getId()).toString())); //conversion Long (u.getid()) to Int
+//            }
+//        }   
     }
 
     public void update(User user) {
     if (user == null) {
             throw new NullPointerException("User is Null");
         }
-        for (User u : mockList) {
-            if (u.getId().equals(user.getId())) {                             
-                    u.setBirthDay(user.getBirthDay());
-                    u.setFirstName(user.getFirstName());
-                    u.setGender(user.getGender());
-                    u.setLastName(user.getLastName());
-                    u.setWeight(user.getWeight());
-            }
-        }
+        mockUserDAO.update(user);
+                
+//        for (User u : mockList) {
+//            if (u.getId().equals(user.getId())) {                             
+//                    u.setBirthDay(user.getBirthDay());
+//                    u.setFirstName(user.getFirstName());
+//                    u.setGender(user.getGender());
+//                    u.setLastName(user.getLastName());
+//                    u.setWeight(user.getWeight());
+//            }
+//        }
     }
 
     public List<User> findAll() {
-        return Collections.unmodifiableList(mockList);
+      //  return Collections.unmodifiableList(mockList);
+        return Collections.unmodifiableList(mockUserDAO.findAll());
     }
     
 }
