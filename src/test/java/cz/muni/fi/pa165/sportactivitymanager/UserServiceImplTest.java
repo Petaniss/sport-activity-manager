@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager.services;
+package cz.muni.fi.pa165.sportactivitymanager;
 
-import cz.muni.fi.pa165.sportactivitymanager.UserDTO;
-import cz.muni.fi.pa165.sportactivitymanager.Gender;
+import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
+import cz.muni.fi.pa165.sportactivitymanager.service.UserServiceImpl;
+import cz.muni.fi.pa165.sportactivitymanager.mock.UserDAOMock;
 import java.util.Date;
 import java.util.List;
 import static org.junit.Assert.assertEquals;

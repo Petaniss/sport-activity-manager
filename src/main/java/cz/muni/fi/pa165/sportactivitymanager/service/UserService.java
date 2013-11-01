@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager.services;
+package cz.muni.fi.pa165.sportactivitymanager.service;
 
 //aby fungoval import, bylo potřeba přidat Dependency na původní DAO třídy(SportActivityManager dependency)
-import cz.muni.fi.pa165.sportactivitymanager.UserDTO;
+import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
 import java.util.List;
 
 /**

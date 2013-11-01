@@ -4,17 +4,14 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager.service;
 
-import cz.muni.fi.pa165.sportactivitymanager.UserDTO;
-import cz.muni.fi.pa165.sportactivitymanager.UserDAO;
-import cz.muni.fi.pa165.sportactivitymanager.UserDTOChanger;
+import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
+import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
+import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTOChanger;
 import cz.muni.fi.pa165.sportactivitymanager.User;
 import cz.muni.fi.pa165.sportactivitymanager.DataAccException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.ws.ServiceMode;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.dao.DataAccessException;
 
 /**
