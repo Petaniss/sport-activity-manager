@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager;
+package cz.muni.fi.pa165.sportactivitymanager.dto;
 
+import cz.muni.fi.pa165.sportactivitymanager.Gender;
 import java.util.Date;
 import javax.persistence.Temporal;
 

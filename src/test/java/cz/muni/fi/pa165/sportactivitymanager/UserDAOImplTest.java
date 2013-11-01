@@ -4,6 +4,8 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager;
 
+import cz.muni.fi.pa165.sportactivitymanager.dao.impl.UserDAOImpl;
+import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import static cz.muni.fi.pa165.sportactivitymanager.UserDAOImplTest.AssertUserCompletely;
 import java.util.Date;
 import java.util.List;

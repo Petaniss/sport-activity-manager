@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager;
+package cz.muni.fi.pa165.sportactivitymanager.dao.impl;
 
+import cz.muni.fi.pa165.sportactivitymanager.User;
+import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,7 +16,7 @@ import javax.persistence.EntityManagerFactory;
  * @author Dobes Kuba
  * 
  */
-class UserDAOImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager em; 

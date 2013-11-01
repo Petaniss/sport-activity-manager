@@ -1,6 +1,8 @@
 
 package cz.muni.fi.pa165.sportactivitymanager;
 
+import cz.muni.fi.pa165.sportactivitymanager.dao.impl.CaloriesTableDAOImpl;
+import cz.muni.fi.pa165.sportactivitymanager.dao.CaloriesTableDAO;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.Before;

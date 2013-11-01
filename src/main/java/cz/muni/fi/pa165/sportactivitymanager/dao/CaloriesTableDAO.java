@@ -1,6 +1,7 @@
 
-package cz.muni.fi.pa165.sportactivitymanager;
+package cz.muni.fi.pa165.sportactivitymanager.dao;
 
+import cz.muni.fi.pa165.sportactivitymanager.CaloriesTable;
 import java.util.List;
 
 /**
