@@ -17,12 +17,13 @@ import java.util.List;
  * @author Dobes Kuba
  */
 
+//public class UserDAOMock {
 public class UserDAOMock implements UserDAO{
 
    // dobry// private User mockUser = mock(User.class);
   //  private LinkedList mockList = mock(LinkedList<User>());
    //private List<User> mockList = new ArrayList<User>();
-    private List mockList = mock(List.class);
+   // private List mockList = mock(List.class);
     private UserDAO mockUserDAO = mock(UserDAO.class);
    private long id = 0;
     

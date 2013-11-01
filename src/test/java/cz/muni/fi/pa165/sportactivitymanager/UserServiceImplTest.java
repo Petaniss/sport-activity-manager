@@ -4,9 +4,11 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager;
 
+import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
 import cz.muni.fi.pa165.sportactivitymanager.service.UserServiceImpl;
 import cz.muni.fi.pa165.sportactivitymanager.mock.UserDAOMock;
+import static org.mockito.Mockito.*;
 import java.util.Date;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -29,13 +31,15 @@ import org.junit.Test;
 public class UserServiceImplTest {
     
     private UserServiceImpl uService;
-    private UserDAOMock userMockDAO;
+  //  private UserDAOMock userMockDAO;
+    private UserDAO userMockDAO;
     
     //creates instance of userServiceImpl and sets it's DAO to MockDAO
     @Before
     public void setUp() {
         uService = new UserServiceImpl();
-        userMockDAO = new UserDAOMock();
+      //  userMockDAO = new UserDAOMock();
+        userMockDAO = mock(UserDAO.class);
         uService.setUserDAO(userMockDAO);
    
     }
@@ -282,7 +286,8 @@ public class UserServiceImplTest {
         userDto1.setGender(Gender.MALE);
         
         uService.create(userDto1);
-        assertNotNull(uService.getByID(userDto1.getId()));
+        //assertNotNull(uService.getByID(userDto1.getId()));
+        assertNotNull(userDto1.getId());
         uService.delete(userDto1);
         assertNull(uService.getByID(userDto1.getId()));
       }
