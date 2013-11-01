@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager;
+package cz.muni.fi.pa165.sportactivitymanager.dao;
 
+import cz.muni.fi.pa165.sportactivitymanager.SportActivity;
 import cz.muni.fi.pa165.sportactivitymanager.dao.impl.SportActivityDAOImpl;
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportActivityDAO;
 import java.util.List;

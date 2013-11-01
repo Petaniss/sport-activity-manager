@@ -2,11 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager;
+package cz.muni.fi.pa165.sportactivitymanager.dao;
 
+import cz.muni.fi.pa165.sportactivitymanager.Gender;
+import cz.muni.fi.pa165.sportactivitymanager.User;
 import cz.muni.fi.pa165.sportactivitymanager.dao.impl.UserDAOImpl;
 import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
-import static cz.muni.fi.pa165.sportactivitymanager.UserDAOImplTest.AssertUserCompletely;
+import static cz.muni.fi.pa165.sportactivitymanager.dao.UserDAOImplTest.AssertUserCompletely;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;

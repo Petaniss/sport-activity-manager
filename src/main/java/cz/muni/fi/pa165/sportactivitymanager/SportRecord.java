@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "findAllSportRecord",
             query = "SELECT sr FROM SportRecord sr"),})
 public class SportRecord implements Serializable {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

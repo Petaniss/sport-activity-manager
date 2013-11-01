@@ -5,36 +5,24 @@
 package cz.muni.fi.pa165.sportactivitymanager.service;
 
 import cz.muni.fi.pa165.sportactivitymanager.SportRecord;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTO;
 import java.util.List;
 
 /**
  *
  * @author Phaser
  */
-public class SportRecordService{
+public interface SportRecordService {
 
-    public void create(SportRecord sportRecord) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    void create(SportRecordTO sportRecordTO);
 
-    public SportRecord getSportRecord(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    SportRecordTO getSportRecord(Long id);
 
-    public void delete(SportRecord sportRecord) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    void delete(SportRecordTO sportRecordTO);
 
-    public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    void delete(Long id);
 
-    public void update(SportRecord sportRecord) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    void update(SportRecordTO sportRecordTO);
 
-    public List<SportRecord> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    List<SportRecordTO> findAll();
 }

@@ -1,6 +1,8 @@
 
-package cz.muni.fi.pa165.sportactivitymanager;
+package cz.muni.fi.pa165.sportactivitymanager.dao;
 
+import cz.muni.fi.pa165.sportactivitymanager.CaloriesTable;
+import cz.muni.fi.pa165.sportactivitymanager.Gender;
 import cz.muni.fi.pa165.sportactivitymanager.dao.impl.CaloriesTableDAOImpl;
 import cz.muni.fi.pa165.sportactivitymanager.dao.CaloriesTableDAO;
 import javax.persistence.EntityManagerFactory;
