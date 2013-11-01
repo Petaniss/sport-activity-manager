@@ -5,6 +5,7 @@
 package cz.muni.fi.pa165.sportactivitymanager;
 
 import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
+import cz.muni.fi.pa165.sportactivitymanager.dao.impl.UserDAOImpl;
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
 import cz.muni.fi.pa165.sportactivitymanager.service.UserServiceImpl;
 import cz.muni.fi.pa165.sportactivitymanager.mock.UserDAOMock;
@@ -32,14 +33,14 @@ public class UserServiceImplTest {
     
     private UserServiceImpl uService;
   //  private UserDAOMock userMockDAO;
-    private UserDAO userMockDAO;
+    private UserDAOImpl userMockDAO;
     
     //creates instance of userServiceImpl and sets it's DAO to MockDAO
     @Before
     public void setUp() {
         uService = new UserServiceImpl();
       //  userMockDAO = new UserDAOMock();
-        userMockDAO = mock(UserDAO.class);
+        userMockDAO = mock(UserDAOImpl.class);
         uService.setUserDAO(userMockDAO);
    
     }
