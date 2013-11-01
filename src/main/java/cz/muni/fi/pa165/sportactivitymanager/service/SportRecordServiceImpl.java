@@ -17,13 +17,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class SportRecordServiceImpl implements SportRecordService {
 
-    private SportRecordDAO SRDao;
+    private SportRecordDAO sRDao;
 
+    public void setSRDao(SportRecordDAO sRDao) {
+        this.sRDao = sRDao;
+    }
+    
     public void create(SportRecordTO sportRecordTO) {
         if (sportRecordTO != null) {
             try {
                 SportRecord sr = SportRecordTOChanger.TOToEntity(sportRecordTO);
-                SRDao.create(sr);
+                sRDao.create(sr);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
             }
@@ -37,7 +41,7 @@ public class SportRecordServiceImpl implements SportRecordService {
 
         if (id != null) {
             try {
-                SportRecord sportRecord = SRDao.getSportRecord(id);
+                SportRecord sportRecord = sRDao.getSportRecord(id);
                 sportRecordTO = SportRecordTOChanger.entityToTO(sportRecord);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
@@ -53,7 +57,7 @@ public class SportRecordServiceImpl implements SportRecordService {
         if (sportRecordTO != null) {
             try {
                 SportRecord sportRecord = SportRecordTOChanger.TOToEntity(sportRecordTO);
-                SRDao.delete(sportRecord);
+                sRDao.delete(sportRecord);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
             }
@@ -65,7 +69,7 @@ public class SportRecordServiceImpl implements SportRecordService {
     public void delete(Long id) {
         if (id != null) {
             try {
-                SRDao.delete(id);
+                sRDao.delete(id);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
             }
@@ -78,7 +82,7 @@ public class SportRecordServiceImpl implements SportRecordService {
         if (sportRecordTO != null) {
             try {
                 SportRecord sportRecord = SportRecordTOChanger.TOToEntity(sportRecordTO);
-                SRDao.update(sportRecord);
+                sRDao.update(sportRecord);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
             }
@@ -91,7 +95,7 @@ public class SportRecordServiceImpl implements SportRecordService {
         List<SportRecordTO> sportRecordsTO = new ArrayList<SportRecordTO>();
         List<SportRecord> sportRecords;
         try {
-            sportRecords = SRDao.findAll();
+            sportRecords = sRDao.findAll();
             sportRecordsTO = SportRecordTOChanger.entityListToDtoList(sportRecords);
         } catch (DataAccessException ex) {
             throw new DataAccException(ex.toString());

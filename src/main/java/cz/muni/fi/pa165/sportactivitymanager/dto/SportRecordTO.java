@@ -20,17 +20,17 @@ public class SportRecordTO {
     private int distance;
     private Date StartTime;
 
+    public SportRecordTO() {
+    }
+    
     public SportRecordTO(Long id, UserDTO user, Long duration, int distance, Date StartTime) {
+        this();
         this.id = id;
         this.user = user;
         this.duration = duration;
         this.distance = distance;
         this.StartTime = StartTime;
     }
-
-    public SportRecordTO() {
-    }
-   
     
 
     public Long getId() {
