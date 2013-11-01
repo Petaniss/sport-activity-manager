@@ -36,6 +36,13 @@
      <property name="uDao" ref="userDao"/>
  </bean>
  
+    <bean id="sRDaoImpl" class="cz.muni.fi.pa165.sportactivitymanager.dao.impl.SportRecordDAOImpl">
+ </bean>
+ 
+ <bean id="sRService" class="cz.muni.fi.pa165.sportactivitymanager.service.SportRecordServiceImpl">
+     <property name="sRDao" ref="sRDaoImpl"/>
+ </bean>
+ 
 <!--    
       <tx:annotation-driven/>
 
@@ -50,5 +57,5 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
---!>    
+-->    
 </beans>

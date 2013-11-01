@@ -5,7 +5,6 @@
 package cz.muni.fi.pa165.sportactivitymanager.dto;
 
 import cz.muni.fi.pa165.sportactivitymanager.SportRecord;
-import cz.muni.fi.pa165.sportactivitymanager.User;
 import java.util.ArrayList;
 import java.util.List;
 

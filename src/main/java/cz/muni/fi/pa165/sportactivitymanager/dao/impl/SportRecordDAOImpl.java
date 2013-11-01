@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager.dao.impl;
 
+
 import cz.muni.fi.pa165.sportactivitymanager.SportRecord;
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportRecordDAO;
 import java.util.List;
