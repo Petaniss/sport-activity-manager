@@ -66,6 +66,11 @@ public class CaloriesTableDTO
     @Override
     public String toString()
     {
-        return "CaloriesTableDTO{" + "id=" + id + ", calories60Kg=" + calories60Kg + ", calories70Kg=" + calories70Kg + ", calories80Kg=" + calories80Kg + ", calories90Kg=" + calories90Kg + ", gender=" + gender + '}';
+        return "CaloriesTableDTO{" + "id=" + id 
+                                   + ", calories60Kg=" + calories60Kg 
+                                   + ", calories70Kg=" + calories70Kg 
+                                   + ", calories80Kg=" + calories80Kg 
+                                   + ", calories90Kg=" + calories90Kg 
+                                   + ", gender=" + gender + '}';
     }    
 }
