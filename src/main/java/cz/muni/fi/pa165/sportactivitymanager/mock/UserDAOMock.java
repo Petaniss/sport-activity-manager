@@ -4,10 +4,12 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager.mock;
 
+import static org.mockito.Mockito.*;
 import cz.muni.fi.pa165.sportactivitymanager.User;
 import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,7 +19,8 @@ import java.util.List;
 
 public class UserDAOMock implements UserDAO{
 
-    private List<User> mockList = new ArrayList<User>();
+    private LinkedList mockList = mock(LinkedList<User>());
+  //  private List<User> mockList = new ArrayList<User>();
     private long id = 0;
     
      // Dobes Kuba: vytvorim si list mockList a do nej pridam usera
