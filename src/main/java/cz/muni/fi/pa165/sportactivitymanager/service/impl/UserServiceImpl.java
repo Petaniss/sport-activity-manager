@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager.service;
+package cz.muni.fi.pa165.sportactivitymanager.service.impl;
 
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
 import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTOChanger;
 import cz.muni.fi.pa165.sportactivitymanager.User;
 import cz.muni.fi.pa165.sportactivitymanager.DataAccException;
+import cz.muni.fi.pa165.sportactivitymanager.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,6 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Dobes KUba
  */
-//TODO datasource do applicatonContext.xml
-//1.11 NEW repository
 
 @Service
 public class UserServiceImpl implements UserService{

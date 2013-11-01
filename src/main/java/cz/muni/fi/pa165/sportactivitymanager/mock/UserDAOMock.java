@@ -27,9 +27,11 @@ public class UserDAOMock implements UserDAO{
     private UserDAO mockUserDAO = mock(UserDAO.class);
    private long id = 0;
     
-     // Dobes Kuba: vytvorim si list mockList a do nej pridam usera
-     // v dalsich metodach pracuju jen s MOCKListem a ten prochazim a hledam odpovidajiciho usera
-    // a s nim potom pracuju(updatuju, mazu...)
+  /**
+  *   Dobes Kuba: vytvorim si list mockList a do nej pridam usera
+  *   v dalsich metodach pracuju jen s MOCKListem a ten prochazim a hledam odpovidajiciho usera
+  *   a s nim potom pracuju(updatuju, mazu...)
+  */
     public void create(User user) {
      if(user == null){
             throw new NullPointerException("User is Null");

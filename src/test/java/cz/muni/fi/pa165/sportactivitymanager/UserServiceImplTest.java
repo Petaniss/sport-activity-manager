@@ -7,7 +7,7 @@ package cz.muni.fi.pa165.sportactivitymanager;
 import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import cz.muni.fi.pa165.sportactivitymanager.dao.impl.UserDAOImpl;
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
-import cz.muni.fi.pa165.sportactivitymanager.service.UserServiceImpl;
+import cz.muni.fi.pa165.sportactivitymanager.service.impl.UserServiceImpl;
 import cz.muni.fi.pa165.sportactivitymanager.mock.UserDAOMock;
 import static org.mockito.Mockito.*;
 import java.util.Date;
@@ -25,10 +25,8 @@ import org.junit.Test;
  *
  * @author Dobes Kuba
  */
-//TODO:
-//rewrite comments
-//testy jsou hotovy, jen dodelat malickosti
-//uService.get .. mozna predelat
+
+
 public class UserServiceImplTest {
     
     private UserServiceImpl uService;
