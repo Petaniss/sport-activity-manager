@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService{
         if(id != null){  
             try{
                         User user = uDao.getByID(id);
-                         userDto = UserDTOChanger.entityToDTO(user);
+                        userDto = UserDTOChanger.entityToDTO(user);
                 }
                 catch(DataAccessException ex)
                     {
