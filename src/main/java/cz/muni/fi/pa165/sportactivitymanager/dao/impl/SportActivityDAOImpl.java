@@ -15,9 +15,14 @@ import javax.persistence.EntityManagerFactory;
  * @author Petr Jelínek
  */
 public class SportActivityDAOImpl implements SportActivityDAO {
+
+    public SportActivityDAOImpl() {
+    }
     
     private EntityManagerFactory emf;
     private EntityManager em;
+    
+    
 
     public SportActivityDAOImpl(EntityManagerFactory emf) {
         if (emf == null) throw new NullPointerException();
