@@ -48,7 +48,7 @@ public class UserServiceImplTest {
         uService = new UserServiceImpl();
       //  userMockDAO = new UserDAOMock();
         userMockDAO = mock(UserDAOImpl.class);
-        uService.setUserDAO(userMockDAO);
+        uService.setuDao(userMockDAO);
         
        user = new User();       
        Date birthD3 = new Date(100, 10, 20);

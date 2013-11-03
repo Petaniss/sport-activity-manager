@@ -26,8 +26,13 @@ public class UserServiceImpl implements UserService{
     
     private UserDAO uDao;
     
-    public void setUserDAO(UserDAO uDao) {
+    //renamed name of Method - due to Beans
+    public void setuDao(UserDAO uDao) {
         this.uDao = uDao;
+    }
+
+    public UserDAO getuDao() {
+        return uDao;
     }
 
     @Transactional
