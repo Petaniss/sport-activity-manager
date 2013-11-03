@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.dao.DataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService{
         this.uDao = uDao;
     }
 
+    @Transactional
     public void create(UserDTO userDto) {
         if (userDto!=null)
         {

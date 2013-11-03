@@ -35,7 +35,20 @@
         <property name="sportDAO" ref="sportActivityDao" />
     </bean>
 
-
+    <!-- /// user /// -->
+    <!-- userDao + entityManager -->
+    <bean id="userDao" class="cz.muni.fi.pa165.sportactivitymanager.dao.impl.UserDAOImpl">
+        <property name="em">
+            <bean class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
+                <property name = "entityManagerFactory" ref="emf"/>  
+            </bean>
+        </property>
+    </bean>
+    
+    <!-- userService -->
+    <bean id="userService" class="cz.muni.fi.pa165.sportactivitymanager.service.impl.UserServiceImpl">
+        <property name="uDao" ref="userDao" />
+    </bean>
 
 
 

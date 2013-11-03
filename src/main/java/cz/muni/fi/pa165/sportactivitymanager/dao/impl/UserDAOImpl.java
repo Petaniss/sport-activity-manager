@@ -14,26 +14,37 @@ import javax.persistence.EntityManagerFactory;
 /**
  *
  * @author Dobes Kuba
+ * @version 2.0 - Spring: removed Transactions and EntityManagerFactory replaced by Spring beans
  * 
  */
 public class UserDAOImpl implements UserDAO {
 
-    private EntityManagerFactory entityManagerFactory;
+ //   private EntityManagerFactory entityManagerFactory;
     private EntityManager em; 
     
     public UserDAOImpl(EntityManagerFactory emf) {
         if (emf == null) throw new NullPointerException();
-        this.entityManagerFactory = emf;
-        this.em = entityManagerFactory.createEntityManager();
+    //    this.entityManagerFactory = emf;
+   //     this.em = entityManagerFactory.createEntityManager();
+        this.em = emf.createEntityManager();
+
+    }
+    
+     public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
     public void create(User user) {
         if(user == null){
             throw new NullPointerException("User is Null");
         }
-        em.getTransaction().begin();
+        //em.getTransaction().begin();
         em.persist(user);
-        em.getTransaction().commit();
+        //em.getTransaction().commit();
     }
 
     public User getByID(Long id) {
@@ -43,9 +54,9 @@ public class UserDAOImpl implements UserDAO {
         if(id < 0){
             throw new IllegalArgumentException("User ID must be Positive");
         }
-        em.getTransaction().begin();
+     //   em.getTransaction().begin();
         User user = em.find(User.class, id);
-        em.getTransaction().commit();
+      //  em.getTransaction().commit();
         return user;
     }
     
@@ -53,29 +64,32 @@ public class UserDAOImpl implements UserDAO {
         if(user == null){
             throw new NullPointerException("User is Null");
         }
-        em.getTransaction().begin();
+   //     em.getTransaction().begin();
         User user1 = em.find(User.class, user.getId());
         em.remove(user1);
-        em.getTransaction().commit();
+   //     em.getTransaction().commit();
     }   
 
     public void update(User user) {
         if(user == null){
             throw new NullPointerException("User is Null");
         }
-        em.getTransaction().begin();
+        if (em.find(User.class, user.getId()) == null)
+            throw new IllegalArgumentException("this entity does not exist in database");
+        
+  //      em.getTransaction().begin();
         em.merge(user);
-        em.getTransaction().commit();
+  //      em.getTransaction().commit();
     }
 
     public List<User> findAll() {
       
         List<User> list;
         
-        em.getTransaction().begin();
+    //    em.getTransaction().begin();
         list = em.createQuery("SELECT u from User u").getResultList();
-        em.getTransaction().commit();
-        em.close();
+    //    em.getTransaction().commit();
+   //     em.close();
         return Collections.unmodifiableList(list);
     }
     
