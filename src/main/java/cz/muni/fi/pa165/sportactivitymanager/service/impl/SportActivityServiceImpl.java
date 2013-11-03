@@ -12,20 +12,29 @@ import cz.muni.fi.pa165.sportactivitymanager.dto.SportActivityDTOChanger;
 import cz.muni.fi.pa165.sportactivitymanager.service.SportActivityService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Petaniss
  */
+@Service
 public class SportActivityServiceImpl implements SportActivityService {
     
     private SportActivityDAO sportDAO;
+
+    public SportActivityDAO getSportDAO() {
+        return sportDAO;
+    }
 
     public void setSportDAO(SportActivityDAO sportDAO) {
         this.sportDAO = sportDAO;
     }
     
+    @Transactional
     public void create(SportActivityDTO sportActivityDTO) {
         if (sportActivityDTO != null)
         {

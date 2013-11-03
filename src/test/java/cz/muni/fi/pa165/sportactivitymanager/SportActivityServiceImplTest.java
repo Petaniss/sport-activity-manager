@@ -5,26 +5,24 @@
 package cz.muni.fi.pa165.sportactivitymanager;
 
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportActivityDAO;
-import cz.muni.fi.pa165.sportactivitymanager.dao.impl.SportActivityDAOImpl;
-import cz.muni.fi.pa165.sportactivitymanager.service.SportActivityService;
 import cz.muni.fi.pa165.sportactivitymanager.dto.SportActivityDTO;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportActivityDTOChanger;
+import cz.muni.fi.pa165.sportactivitymanager.service.SportActivityService;
 import cz.muni.fi.pa165.sportactivitymanager.service.impl.SportActivityServiceImpl;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
+import static org.mockito.Mockito.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 /**
  *
- * @author Petaniss
+ * @author Petr Jelínek
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -32,28 +30,51 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 public class SportActivityServiceImplTest {
     
     @Autowired
-    private SportActivityServiceImpl sportService;
+    private SportActivityService sportService;
+    
+    private SportActivityServiceImpl mockService;
+    private SportActivityDAO mockDAO;
+    
+    @Before
+    public void setUp() {
+        // service ve ktere se pouziva mock DAO misto zive implementace
+        mockDAO = mock(SportActivityDAO.class);
+        mockService = new SportActivityServiceImpl();
+        mockService.setSportDAO(mockDAO);
+    }
+    
+    @Test //test na implementaci(injekce z applicationContext.xml)
+    public void testCreateAndFind() {
+
+        SportActivityDTO sportDto = new SportActivityDTO();
+        sportDto.setName("diving");
+
+        sportService.create(sportDto);
+
+        //ID can't be null
+        assertNotNull(sportDto.getId());
+
+        Long sportId = sportDto.getId();
+
+        SportActivityDTO sport2fromDB = sportService.getSportActivity(sportDto.getName());
+        assertEquals(sportDto, sport2fromDB);
+    }
+    
+    @Test //mock DAO test
+    public void testCreate(){
+       SportActivityDTO sportDto = new SportActivityDTO();
+       sportDto.setName("diving");
+   
+        mockService.create(sportDto);
+        
+        verify(mockDAO)
+                .create(SportActivityDTOChanger.dtoToEntity(sportDto));
+    }
     
     @Test
-    public void testCreateAndFind(){
-       SportActivityDTO sportDto = new SportActivityDTO();
-       
-       sportDto.setName("diving");
-       
-       sportService.create(sportDto);
-       
-       
-       //ID can't be null
-       assertNotNull(sportDto.getId());
-       
-       
-       Long sportId = sportDto.getId();
-       
-       SportActivityDTO sport2fromDB = sportService.getSportActivity(sportId);
-       //are two objects equal?
-       assertEquals(sportDto, sport2fromDB);
-       //refer two object to the same object?
-      // assertSame(userDto, user2fromDB);       
+    public void testFindAll() {
+        List<SportActivityDTO> listActivityDto = mockService.findAll();
+        verify(mockDAO).findAll();
     }
     
 }

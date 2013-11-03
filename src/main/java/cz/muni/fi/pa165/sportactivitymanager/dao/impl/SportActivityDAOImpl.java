@@ -15,28 +15,29 @@ import javax.persistence.EntityManagerFactory;
  * @author Petr Jelínek
  */
 public class SportActivityDAOImpl implements SportActivityDAO {
-
-    public SportActivityDAOImpl() {
-    }
     
-    private EntityManagerFactory emf;
     private EntityManager em;
-    
-    
 
+    public SportActivityDAOImpl() { }
+    
     public SportActivityDAOImpl(EntityManagerFactory emf) {
         if (emf == null) throw new NullPointerException();
-        this.emf = emf;
         this.em = emf.createEntityManager();
+    }
+    
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
     
     public void create(SportActivity sportActivity) {
         if (sportActivity == null)
             throw new NullPointerException();
         
-        em.getTransaction().begin();
         em.persist(sportActivity);
-        em.getTransaction().commit();
     }
 
     public SportActivity getSportActivity(Long id) {
@@ -73,9 +74,7 @@ public class SportActivityDAOImpl implements SportActivityDAO {
         if (toDelete == null)
             throw new IllegalArgumentException("this entity does not exist in database.");
         
-        em.getTransaction().begin();
         em.remove(toDelete);
-        em.getTransaction().commit();
     }
 
     public void update(SportActivity sportActivity) {
@@ -85,9 +84,7 @@ public class SportActivityDAOImpl implements SportActivityDAO {
         if (em.find(SportActivity.class, sportActivity.getId()) == null)
             throw new IllegalArgumentException("this entity does not exist in database");
         
-        em.getTransaction().begin();
         em.persist(sportActivity);
-        em.getTransaction().commit();
     }
 
     public List<SportActivity> findAll() {
