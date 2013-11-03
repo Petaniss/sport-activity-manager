@@ -15,11 +15,13 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Dobes Kuba
  * @version 2.0 - Spring: removed Transactions from methods and EntityManagerFactory. Replaced by Spring beans
- * 
+ *                        added default constructor (empty)
  */
 public class UserDAOImpl implements UserDAO {
 
     private EntityManager em; 
+    
+    public UserDAOImpl() {}
     
     public UserDAOImpl(EntityManagerFactory emf) {
         if (emf == null) throw new NullPointerException();

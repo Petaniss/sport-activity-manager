@@ -35,6 +35,7 @@
         <property name="sportDAO" ref="sportActivityDao" />
     </bean>
 
+
     <!-- /// user /// -->
     <!-- userDao + entityManager -->
     <bean id="userDao" class="cz.muni.fi.pa165.sportactivitymanager.dao.impl.UserDAOImpl">
