@@ -14,7 +14,7 @@ import javax.persistence.EntityManagerFactory;
 /**
  *
  * @author Dobes Kuba
- * @version 2.0 - Spring: removed Transactions from methods and EntityManagerFactory replaced by Spring beans
+ * @version 2.0 - Spring: removed Transactions from methods and EntityManagerFactory. Replaced by Spring beans
  * 
  */
 public class UserDAOImpl implements UserDAO {
