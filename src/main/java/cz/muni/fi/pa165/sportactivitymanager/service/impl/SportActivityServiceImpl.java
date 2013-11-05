@@ -12,7 +12,6 @@ import cz.muni.fi.pa165.sportactivitymanager.dto.SportActivityDTOChanger;
 import cz.muni.fi.pa165.sportactivitymanager.service.SportActivityService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +53,7 @@ public class SportActivityServiceImpl implements SportActivityService {
         }
     }
 
+    @Transactional
     public SportActivityDTO getSportActivity(Long id) {
         SportActivityDTO activityDto = null;
        
@@ -74,6 +74,7 @@ public class SportActivityServiceImpl implements SportActivityService {
         return activityDto;
     }
 
+    @Transactional
     public SportActivityDTO getSportActivity(String name) {
         SportActivityDTO activityDto = null;
        
@@ -94,6 +95,7 @@ public class SportActivityServiceImpl implements SportActivityService {
         return activityDto;
     }
 
+    @Transactional
     public void delete(SportActivityDTO sportActivity) {
         if (sportActivity != null)
         {
@@ -109,6 +111,7 @@ public class SportActivityServiceImpl implements SportActivityService {
         }
     }
 
+    @Transactional
     public void update(SportActivityDTO sportActivity) {
         if (sportActivity != null)
         {
@@ -125,6 +128,7 @@ public class SportActivityServiceImpl implements SportActivityService {
         }
     }
 
+    @Transactional
     public List<SportActivityDTO> findAll() {
         List<SportActivityDTO> activityDto = new ArrayList<SportActivityDTO>();
         

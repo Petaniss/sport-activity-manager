@@ -6,8 +6,8 @@ package cz.muni.fi.pa165.sportactivitymanager.dao;
 
 import cz.muni.fi.pa165.sportactivitymanager.SportActivity;
 import cz.muni.fi.pa165.sportactivitymanager.dao.impl.SportActivityDAOImpl;
-import cz.muni.fi.pa165.sportactivitymanager.dao.SportActivityDAO;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -25,11 +25,13 @@ import org.junit.Test;
 public class SportActivityDAOImplTest {
     
     private SportActivityDAO sportActivityDao;
+    private EntityManager em;
     
     @Before
     public void SetUp() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("SportActivityTestInMemory-PU");
-        //sportActivityDao = new SportActivityDAOImpl(emf);
+        this.em = emf.createEntityManager();
+        sportActivityDao = new SportActivityDAOImpl(em);
     }
 
     @After
@@ -42,7 +44,9 @@ public class SportActivityDAOImplTest {
         SportActivity sa = new SportActivity();
         sa.setName("Archery");
         
+        em.getTransaction().begin();
         sportActivityDao.create(sa);
+        em.getTransaction().commit();
 
         if (sa.getId() == null) {
             fail("Fail during SportActivity create");
@@ -52,7 +56,9 @@ public class SportActivityDAOImplTest {
     @Test
     public void testCreateNullActivity() {
         try {
+            em.getTransaction().begin();
             sportActivityDao.create(null);
+            em.getTransaction().commit();
             fail("Create was called with null Activity");
         } catch (NullPointerException ex) {
         }
@@ -61,9 +67,10 @@ public class SportActivityDAOImplTest {
     @Test
     public void testDeleteNullOrNonExistActivity() {
         SportActivity sa = null;
+        em.getTransaction().begin();
         try {
             sportActivityDao.delete(sa);
-            fail("Create was called with null Activity");
+            fail("Delete was called with null Activity");
         } catch (NullPointerException ex) {
         }
         
@@ -72,9 +79,11 @@ public class SportActivityDAOImplTest {
         sa2.setId(Long.MIN_VALUE);
         try {
             sportActivityDao.delete(sa2);
+            em.getTransaction().commit();
             fail("Delete Activity is not exist in db");
         } catch (IllegalArgumentException ex) {
         }
+        em.getTransaction().commit();
     }
     
     @Test
@@ -82,7 +91,9 @@ public class SportActivityDAOImplTest {
         SportActivity sa = new SportActivity();
         sa.setName("Archery");
 
+        em.getTransaction().begin();
         sportActivityDao.create(sa);
+        em.getTransaction().commit();
 
         //ID can't be null
         assertNotNull(sa.getId());
@@ -105,8 +116,11 @@ public class SportActivityDAOImplTest {
         SportActivity sa2 = new SportActivity();
         sa2.setName("Diving");
 
+        em.getTransaction().begin();
         sportActivityDao.create(sa);
         sportActivityDao.create(sa2);
+        em.getTransaction().commit();
+        
         List<SportActivity> all = sportActivityDao.findAll();
         
         if (all.size() != 2)

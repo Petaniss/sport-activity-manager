@@ -8,7 +8,6 @@ import cz.muni.fi.pa165.sportactivitymanager.SportActivity;
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportActivityDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -20,9 +19,8 @@ public class SportActivityDAOImpl implements SportActivityDAO {
 
     public SportActivityDAOImpl() { }
     
-    public SportActivityDAOImpl(EntityManagerFactory emf) {
-        if (emf == null) throw new NullPointerException();
-        this.em = emf.createEntityManager();
+    public SportActivityDAOImpl(EntityManager em) {
+        this.em = em;
     }
     
     public EntityManager getEm() {
@@ -92,6 +90,4 @@ public class SportActivityDAOImpl implements SportActivityDAO {
             .getResultList();
         
     }   
-
-
 }
