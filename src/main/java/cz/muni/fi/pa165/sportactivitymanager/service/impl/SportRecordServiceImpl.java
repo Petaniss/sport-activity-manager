@@ -31,6 +31,7 @@ public class SportRecordServiceImpl implements SportRecordService {
             try {
                 SportRecord sr = SportRecordDTOChanger.DTOToEntity(sportRecordTO);
                 sRDao.create(sr);
+                sportRecordTO.setId(sr.getId());
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
             }

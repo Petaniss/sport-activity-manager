@@ -23,9 +23,9 @@ public class UserDAOImpl implements UserDAO {
     
     public UserDAOImpl() {}
     
-    public UserDAOImpl(EntityManagerFactory emf) {
-        if (emf == null) throw new NullPointerException();
-        this.em = emf.createEntityManager();
+    public UserDAOImpl(EntityManager em) {
+        if (em == null) throw new NullPointerException();
+        this.em = em;
     }
     
      public EntityManager getEm() {

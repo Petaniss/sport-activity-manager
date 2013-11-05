@@ -70,18 +70,10 @@ public class UserServiceImplTest {
        user2.setWeight(57);
        user2.setId(Long.valueOf(22));
        
-//       userDto = new UserDTO();       
-//       Date birthD4 = new Date(100, 10, 20);
-//       userDto.setBirthDay(birthD4);
-//       userDto.setFirstName("MatinDto");
-//       userDto.setLastName("HajanekDto");
-//       userDto.setGender(Gender.MALE);
-//       userDto.setWeight(57);
-//       
+    
        users.add(user);
        users.add(user2);
        
-       //reaction on call "userMockDAO.findAll())" in test is : .thenReturn(users);
        when(userMockDAO.findAll()).thenReturn(users);
        when(userMockDAO.getByID(Long.valueOf(22))).thenReturn(user2);
     }
