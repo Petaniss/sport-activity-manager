@@ -4,8 +4,7 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager.service;
 
-import cz.muni.fi.pa165.sportactivitymanager.SportRecord;
-import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTO;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordDTO;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ public interface SportRecordService {
      * @throws NullPointerException when argument is Null.
      * @return nothing.
      */
-    void create(SportRecordTO sportRecordTO);
+    void create(SportRecordDTO sportRecordTO);
 
     /**
      * Find existing SportRecordTO
@@ -31,7 +30,7 @@ public interface SportRecordService {
      * @return SportRecordTO with same id, or Null when SportRecordTO does not
      * exist.
      */
-    SportRecordTO getSportRecord(Long id);
+    SportRecordDTO getSportRecord(Long id);
 
     /**
      * Delete existing SportRecord
@@ -42,7 +41,7 @@ public interface SportRecordService {
      * @throws NullPointerException when given null.
      * @return nothing
      */
-    void delete(SportRecordTO sportRecordTO);
+    void delete(SportRecordDTO sportRecordTO);
 
     /**
      * Delete existing SportRecordTO
@@ -63,7 +62,7 @@ public interface SportRecordService {
      * @throws NullPointerException when given null.
      * @return nothing
      */
-    void update(SportRecordTO sportRecordTO);
+    void update(SportRecordDTO sportRecordTO);
 
     /**
      * Find all existing sportRecordTO
@@ -71,5 +70,5 @@ public interface SportRecordService {
      * @param nothing
      * @return List of all sportRecordTO
      */
-    List<SportRecordTO> findAll();
+    List<SportRecordDTO> findAll();
 }

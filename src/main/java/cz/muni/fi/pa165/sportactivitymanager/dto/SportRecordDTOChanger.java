@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author Phaser
  */
-public class SportRecordTOChanger {
+public class SportRecordDTOChanger {
     
     //convert SportRecordTO to Entity SportRecord
-    public static SportRecord TOToEntity(SportRecordTO sportRecordTO) {
+    public static SportRecord DTOToEntity(SportRecordDTO sportRecordTO) {
         
         if(null == sportRecordTO) return null;
         
@@ -30,11 +30,11 @@ public class SportRecordTOChanger {
     }
     
         //convert SportRecord to Entity SportRecordTO
-    public static SportRecordTO entityToTO(SportRecord sportRecord) {
+    public static SportRecordDTO entityToDTO(SportRecord sportRecord) {
         
         if(null == sportRecord) return null;
         
-        SportRecordTO sportRecordTO = new SportRecordTO();  
+        SportRecordDTO sportRecordTO = new SportRecordDTO();  
         
         sportRecordTO.setId(sportRecord.getId());
         sportRecordTO.setDistance(sportRecord.getDistance());
@@ -44,12 +44,12 @@ public class SportRecordTOChanger {
         return sportRecordTO;
     }
     
-    public static List<SportRecordTO> entityListToDtoList( List<SportRecord> sportRecord ) {
+    public static List<SportRecordDTO> entityListDTOToList( List<SportRecord> sportRecord ) {
         if(sportRecord == null) return null;
         
-        List<SportRecordTO> sportRecordTOList =  new ArrayList<SportRecordTO>();
+        List<SportRecordDTO> sportRecordTOList =  new ArrayList<SportRecordDTO>();
         for(int i = 0; i<sportRecord.size(); i++){
-            sportRecordTOList.add(entityToTO(sportRecord.get(i)));
+            sportRecordTOList.add(entityToDTO(sportRecord.get(i)));
         }
         return sportRecordTOList;
     }

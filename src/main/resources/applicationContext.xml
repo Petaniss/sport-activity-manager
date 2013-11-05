@@ -34,6 +34,23 @@
     <bean id="sportActivityService" class="cz.muni.fi.pa165.sportactivitymanager.service.impl.SportActivityServiceImpl">
         <property name="sportDAO" ref="sportActivityDao" />
     </bean>
+    
+    
+    <!-- /// sportRecord /// -->
+    <!-- sportRecordDao + entityManager -->
+    <bean id="sportRecordDao" class="cz.muni.fi.pa165.sportactivitymanager.dao.impl.SportRecordDAOImpl">
+        <property name="em">
+            <bean class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
+                <property name = "entityManagerFactory" ref="emf"/>  
+            </bean>
+        </property>
+    </bean>
+    
+    <!-- sportRecordService -->
+    <bean id="sportRecordService" class="cz.muni.fi.pa165.sportactivitymanager.service.impl.SportRecordServiceImpl">
+        <property name="sRDao" ref="sportRecordDao" />
+    </bean>
+    
 
 
     <!-- /// user /// -->
@@ -64,13 +81,7 @@
         <property name="uDao" ref="userDao"/>
     </bean>
 
-    <bean id="sRDaoImpl" class="cz.muni.fi.pa165.sportactivitymanager.dao.impl.SportRecordDAOImpl">
-    </bean>
- 
-    <bean id="sRService" class="cz.muni.fi.pa165.sportactivitymanager.service.SportRecordServiceImpl">
-        <property name="sRDao" ref="sRDaoImpl"/>
-    </bean>
-    
+   
     -->
     
    

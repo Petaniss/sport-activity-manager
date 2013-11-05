@@ -4,12 +4,10 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager.dao.impl;
 
-
 import cz.muni.fi.pa165.sportactivitymanager.SportRecord;
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportRecordDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -17,27 +15,30 @@ import javax.persistence.EntityManagerFactory;
  */
 public class SportRecordDAOImpl implements SportRecordDAO {
 
-    private EntityManagerFactory emf = null;
-    private EntityManager em = null;
-//    public SportRecordDAOImpl() {
-//    }
+    private EntityManager em;
 
-    public SportRecordDAOImpl(EntityManagerFactory emf) {
-//        this();
-        if (emf == null) {
-            throw new NullPointerException();
-        }
-        this.emf = emf;
-        em = emf.createEntityManager();
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public SportRecordDAOImpl() {
+    }
+
+    public SportRecordDAOImpl(EntityManager em) {
+        this.em = em;
     }
 
     public void create(SportRecord sportRecord) {
         if (sportRecord == null) {
             throw new NullPointerException();
         }
-        em.getTransaction().begin();
+
         em.persist(sportRecord);
-        em.getTransaction().commit();
+
     }
 
     public SportRecord getSportRecord(Long id) {
@@ -46,29 +47,30 @@ public class SportRecordDAOImpl implements SportRecordDAO {
         }
         return em.find(SportRecord.class, id);
     }
-    
+
     public void delete(SportRecord sportRecord) {
-        if (sportRecord == null)
-            throw new NullPointerException(); 
-        
+        if (sportRecord == null) {
+            throw new NullPointerException();
+        }
+
         this.delete(sportRecord.getId());
     }
-    
-        public void delete(Long id) {
-        if (id == null)
-            throw new NullPointerException(); 
-        
+
+    public void delete(Long id) {
+        if (id == null) {
+            throw new NullPointerException();
+        }
+
         SportRecord toDelete = em.find(SportRecord.class, id);
-        
-        if (toDelete == null)
+
+        if (toDelete == null) {
             throw new IllegalArgumentException("this entity does not exist in database.");
-        
-        em.getTransaction().begin();
+        }
+
+
         em.remove(toDelete);
-        em.getTransaction().commit();
+
     }
-    
-    
 
     public void update(SportRecord sportRecord) {
         if (sportRecord == null) {
@@ -77,17 +79,14 @@ public class SportRecordDAOImpl implements SportRecordDAO {
         SportRecord srUpd = em.find(SportRecord.class, sportRecord.getId());
         if (srUpd == null) {
             throw new IllegalArgumentException("This entity does not exist in database.");
-        }    
-        em.getTransaction().begin();
+        }
+
         em.persist(sportRecord);
-        em.getTransaction().commit();
+
     }
 
     public List<SportRecord> findAll() {
         return em.createNamedQuery("findAllSportRecord", SportRecord.class)
                 .getResultList();
     }
-//    public void setEntityManagerFactory(EntityManagerFactory emf) {
-//        this.emf = emf;
-//    }
 }

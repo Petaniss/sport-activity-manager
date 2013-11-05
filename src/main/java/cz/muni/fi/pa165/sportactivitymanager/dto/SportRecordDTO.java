@@ -2,31 +2,34 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.sportactivitymanager;
-
+package cz.muni.fi.pa165.sportactivitymanager.dto;
 import java.util.Date;
 
 /**
  *
  * @author Phaser
  */
-public class SportRecordTO {
-     private Long id;
-
-    private User user;
+public class SportRecordDTO {
+    private Long id;
+    private UserDTO user;
     //In seconds
     private Long duration;
     //in meters
     private int distance;
     private Date StartTime;
 
-    public SportRecordTO(Long id, User user, Long duration, int distance, Date StartTime) {
+    public SportRecordDTO() {
+    }
+    
+    public SportRecordDTO(Long id, UserDTO user, Long duration, int distance, Date StartTime) {
+        this();
         this.id = id;
         this.user = user;
         this.duration = duration;
         this.distance = distance;
         this.StartTime = StartTime;
     }
+    
 
     public Long getId() {
         return id;
@@ -36,11 +39,11 @@ public class SportRecordTO {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserDTO getUserDTO() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUserDTO(UserDTO user) {
         this.user = user;
     }
 
@@ -66,8 +69,5 @@ public class SportRecordTO {
 
     public void setStartTime(Date StartTime) {
         this.StartTime = StartTime;
-    }
-    
-    
-    
+    }   
 }

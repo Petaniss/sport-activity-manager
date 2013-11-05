@@ -4,101 +4,83 @@
  */
 package cz.muni.fi.pa165.sportactivitymanager;
 
-import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTO;
+import cz.muni.fi.pa165.sportactivitymanager.dao.SportRecordDAO;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordDTO;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordDTOChanger;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordDTO;
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
+import cz.muni.fi.pa165.sportactivitymanager.service.SportRecordService;
+import cz.muni.fi.pa165.sportactivitymanager.service.impl.SportRecordServiceImpl;
 import cz.muni.fi.pa165.sportactivitymanager.service.impl.SportRecordServiceImpl;
 import java.util.Date;
+import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.mockito.Mockito.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Phaser
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {
+    "classpath:applicationContext.xml"})
 public class SportRecordServiceImplTest {
 
-    SportRecordServiceImpl srs = null;
+    @Autowired
+    private SportRecordService sportService;
+    private SportRecordServiceImpl mockService;
+    private SportRecordDAO mockDAO;
 
     @Before
     public void setUp() {
-        srs = new SportRecordServiceImpl();
+        // service ve ktere se pouziva mock DAO misto zive implementace
+        mockDAO = mock(SportRecordDAO.class);
+        mockService = new SportRecordServiceImpl();
+        mockService.setSRDao(mockDAO);
     }
 
-    /*
-     * Try create new SportRecordTO 
-     * Then assertNotNull tests, whether id isn't null
-     * Then assertSame/assertEquals tests, whether created object and object returned by Get method refer to the same object/are same.  
-     * if not than throw Error
-     * 
-     */
-    @Test
+    @Test //mock DAO test
     public void testCreate() {
-        SportRecordTO mockedsportRecordTO = mock(SportRecordTO.class);
-//        srs.create(mockedsportRecordTO);
-//
-//        srs.getSportRecord(mockedsportRecordTO.getId());
-//
-//        //ID can't be null
-//        assertNotNull(mockedsportRecordTO.getId());
-//
-//
-//        SportRecordTO sportRecordTO = srs.getSportRecord(mockedsportRecordTO.getId());
-//        //are two objects equal?
-//        assertEquals(mockedsportRecordTO, sportRecordTO);
-//        //refer two object to the same object?
-//        assertSame(mockedsportRecordTO, sportRecordTO);
+        SportRecordDTO sportDto = new SportRecordDTO();
+        sportDto.setDistance(100);
+        sportDto.setDuration(Long.MIN_VALUE);
+        sportDto.setStartTime(new Date());
+
+        mockService.create(sportDto);
+
+        verify(mockDAO)
+                .create(SportRecordDTOChanger.DTOToEntity(sportDto));
     }
-    
-    
-        @Test
-    public void testGet(){
-        UserDTO userDto1 = new UserDTO();
-        UserDTO userDto2 = new UserDTO();
-        
-        Date birthD1 = new Date();
-        userDto1.setBirthDay(birthD1);
-        userDto1.setFirstName("Brona");
-        userDto1.setLastName("Kocu");
-        userDto1.setWeight(120);
-        userDto1.setGender(Gender.MALE);
-        
-        Date birthD2 = new Date();
-        userDto2.setBirthDay(birthD2);
-        userDto2.setFirstName("Brona");
-        userDto2.setLastName("Kocu");
-        userDto2.setWeight(120);
-        userDto2.setGender(Gender.MALE);
-               
-        SportRecordTO sportRecordTO1 = new SportRecordTO(Long.MIN_VALUE, userDto1, Long.MIN_VALUE, 100, new Date());
-        SportRecordTO sportRecordTO2 = new SportRecordTO(Long.MIN_VALUE, userDto2, Long.MIN_VALUE, 100, new Date());
-        
-        
-        
-        srs.create(sportRecordTO1);
-        srs.create(sportRecordTO2);
-        
-        assertEquals(sportRecordTO1, srs.getSportRecord(sportRecordTO1.getId()));
-        assertEquals(sportRecordTO2, srs.getSportRecord(sportRecordTO2.getId()));
-        
-        SportRecordTO sportRecordDB = srs.getSportRecord(sportRecordTO1.getId());
-        //id check test 
-        assertEquals(sportRecordDB.getId(), sportRecordTO1.getId());
-        if(sportRecordDB.getId().equals(sportRecordTO2.getId()))fail("Two different SportRecord with same atributes has same ID, but could not have.");   
-              
-        try{
-            srs.getSportRecord(null);
-            fail("SportRecord id can not be Null");
-        }
-        catch(NullPointerException ex){}
-        
-        try{
-            srs.getSportRecord(Long.valueOf("-1"));
-            fail("ID was set to negative number");
-        }
-        catch(IllegalArgumentException ex){}
-     }
-    
+
+    @Test
+    public void testFindAll() {
+        List<SportRecordDTO> listRecordDto = mockService.findAll();
+        verify(mockDAO).findAll();
+    }
+
+    @Test
+    public void testUpdate() {
+        SportRecordDTO sportDto = new SportRecordDTO();
+        sportDto.setDistance(100);
+        sportDto.setDuration(Long.MIN_VALUE);
+        sportDto.setStartTime(new Date());
+
+        mockService.update(sportDto);
+        verify(mockDAO)
+                .update(SportRecordDTOChanger.DTOToEntity(sportDto));
+    }
+
+    @Test
+    public void testGetById() {
+        mockService.getSportRecord(1L);
+        verify(mockDAO)
+                .getSportRecord(1L);
+    }
 }

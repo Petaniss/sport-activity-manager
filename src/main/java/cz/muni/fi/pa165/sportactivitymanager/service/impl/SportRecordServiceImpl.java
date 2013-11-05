@@ -6,14 +6,15 @@ package cz.muni.fi.pa165.sportactivitymanager.service.impl;
 
 import cz.muni.fi.pa165.sportactivitymanager.DataAccException;
 import cz.muni.fi.pa165.sportactivitymanager.SportRecord;
-import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTO;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordDTO;
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportRecordDAO;
-import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordTOChanger;
+import cz.muni.fi.pa165.sportactivitymanager.dto.SportRecordDTOChanger;
 import cz.muni.fi.pa165.sportactivitymanager.service.SportRecordService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SportRecordServiceImpl implements SportRecordService {
@@ -23,11 +24,12 @@ public class SportRecordServiceImpl implements SportRecordService {
     public void setSRDao(SportRecordDAO sRDao) {
         this.sRDao = sRDao;
     }
-    
-    public void create(SportRecordTO sportRecordTO) {
+
+    @Transactional
+    public void create(SportRecordDTO sportRecordTO) {
         if (sportRecordTO != null) {
             try {
-                SportRecord sr = SportRecordTOChanger.TOToEntity(sportRecordTO);
+                SportRecord sr = SportRecordDTOChanger.DTOToEntity(sportRecordTO);
                 sRDao.create(sr);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
@@ -37,13 +39,14 @@ public class SportRecordServiceImpl implements SportRecordService {
         }
     }
 
-    public SportRecordTO getSportRecord(Long id) {
-        SportRecordTO sportRecordTO = null;
+    @Transactional
+    public SportRecordDTO getSportRecord(Long id) {
+        SportRecordDTO sportRecordTO = null;
 
         if (id != null) {
             try {
                 SportRecord sportRecord = sRDao.getSportRecord(id);
-                sportRecordTO = SportRecordTOChanger.entityToTO(sportRecord);
+                sportRecordTO = SportRecordDTOChanger.entityToDTO(sportRecord);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
             }
@@ -54,10 +57,11 @@ public class SportRecordServiceImpl implements SportRecordService {
 
     }
 
-    public void delete(SportRecordTO sportRecordTO) {
+    @Transactional
+    public void delete(SportRecordDTO sportRecordTO) {
         if (sportRecordTO != null) {
             try {
-                SportRecord sportRecord = SportRecordTOChanger.TOToEntity(sportRecordTO);
+                SportRecord sportRecord = SportRecordDTOChanger.DTOToEntity(sportRecordTO);
                 sRDao.delete(sportRecord);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
@@ -67,6 +71,7 @@ public class SportRecordServiceImpl implements SportRecordService {
         }
     }
 
+    @Transactional
     public void delete(Long id) {
         if (id != null) {
             try {
@@ -79,10 +84,10 @@ public class SportRecordServiceImpl implements SportRecordService {
         }
     }
 
-    public void update(SportRecordTO sportRecordTO) {
+    public void update(SportRecordDTO sportRecordTO) {
         if (sportRecordTO != null) {
             try {
-                SportRecord sportRecord = SportRecordTOChanger.TOToEntity(sportRecordTO);
+                SportRecord sportRecord = SportRecordDTOChanger.DTOToEntity(sportRecordTO);
                 sRDao.update(sportRecord);
             } catch (DataAccessException ex) {
                 throw new DataAccException(ex.toString());
@@ -92,12 +97,13 @@ public class SportRecordServiceImpl implements SportRecordService {
         }
     }
 
-    public List<SportRecordTO> findAll() {
-        List<SportRecordTO> sportRecordsTO = new ArrayList<SportRecordTO>();
+    @Transactional
+    public List<SportRecordDTO> findAll() {
+        List<SportRecordDTO> sportRecordsTO = new ArrayList<SportRecordDTO>();
         List<SportRecord> sportRecords;
         try {
             sportRecords = sRDao.findAll();
-            sportRecordsTO = SportRecordTOChanger.entityListToDtoList(sportRecords);
+            sportRecordsTO = SportRecordDTOChanger.entityListDTOToList(sportRecords);
         } catch (DataAccessException ex) {
             throw new DataAccException(ex.toString());
         }

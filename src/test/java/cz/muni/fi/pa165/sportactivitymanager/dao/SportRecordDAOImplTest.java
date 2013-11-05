@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.sportactivitymanager.dao.impl.SportRecordDAOImpl;
 import cz.muni.fi.pa165.sportactivitymanager.dao.SportRecordDAO;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -26,11 +27,13 @@ import org.junit.Test;
 public class SportRecordDAOImplTest {
 
     private SportRecordDAO sportRecordDAO;
+    private EntityManager em;
 
     @Before
     public void SetUp() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("SportActivityTestInMemory-PU");
-        sportRecordDAO = new SportRecordDAOImpl(emf);
+        em = emf.createEntityManager();
+        sportRecordDAO = new SportRecordDAOImpl(em);
     }
 
     @After
@@ -40,8 +43,9 @@ public class SportRecordDAOImplTest {
     @Test
     public void testCreateEmpty() {
         SportRecord sr = new SportRecord();
-
+        em.getTransaction().begin();
         sportRecordDAO.create(sr);
+        em.getTransaction().commit();
         if (sr.getId() == null) {
             fail("Fail due to empty Record");
         }
@@ -50,7 +54,9 @@ public class SportRecordDAOImplTest {
     @Test
     public void testCreateNullSportRecord() {
         try {
+            em.getTransaction().begin();
             sportRecordDAO.create(null);
+            em.getTransaction().commit();
             fail("Create was called with null Record");
         } catch (NullPointerException ex) {
         }
@@ -59,11 +65,15 @@ public class SportRecordDAOImplTest {
     @Test
     public void testDeleteNullRecord() {
         SportRecord sr1 = null;
+        em.getTransaction().begin();
         try {
+
             sportRecordDAO.delete(sr1);
+
             fail("Create was called with null Record");
         } catch (NullPointerException ex) {
         }
+        em.getTransaction().commit();
     }
 
     @Test
@@ -74,7 +84,9 @@ public class SportRecordDAOImplTest {
         sr2.setDuration(Long.MIN_VALUE);
         sr2.setStartTime(new Date());
         try {
+            em.getTransaction().begin();
             sportRecordDAO.delete(sr2);
+            em.getTransaction().commit();
             fail("Delete Activity is not exist in db");
         } catch (IllegalArgumentException ex) {
         }
@@ -86,7 +98,9 @@ public class SportRecordDAOImplTest {
         sr.setDistance(10);
         sr.setDuration(Long.MIN_VALUE);
         sr.setStartTime(new Date());
+        em.getTransaction().begin();
         sportRecordDAO.create(sr);
+        em.getTransaction().commit();
 
         //ID can't be null
         assertNotNull(sr.getId());
@@ -108,8 +122,10 @@ public class SportRecordDAOImplTest {
     public void testFindAll() {
         SportRecord sr1 = new SportRecord();
         SportRecord sr2 = new SportRecord();
+        em.getTransaction().begin();
         sportRecordDAO.create(sr1);
         sportRecordDAO.create(sr2);
+        em.getTransaction().commit();
         List<SportRecord> all = sportRecordDAO.findAll();
 
         if (all.size() != 2) {
