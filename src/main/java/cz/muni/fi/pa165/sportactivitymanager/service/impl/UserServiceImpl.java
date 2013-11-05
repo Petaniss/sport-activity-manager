@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
             throw new NullPointerException("User can not be null.");
         }
     }
-
+   @Transactional
     public UserDTO getByID(Long id) {
         //if(id<0)
         
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService{
         }
             return userDto;
     }
-
+   @Transactional
     public void delete(UserDTO userDto){
      if (userDto!=null)
         {
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService{
             throw new NullPointerException("User can not be null.");
         }
     }
-
+   @Transactional
     public void update(UserDTO userDto) {
      if (userDto!=null)
         {
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService{
             throw new NullPointerException("User can not be null.");
         }
     }
-
+   @Transactional
     public List<UserDTO> findAll() {
         List<UserDTO> usersDto = new ArrayList<UserDTO>();
         List<User> users = new ArrayList<User>();
