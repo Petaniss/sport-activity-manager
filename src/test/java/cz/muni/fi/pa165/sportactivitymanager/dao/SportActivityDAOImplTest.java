@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.sportactivitymanager.dao;
 
 import cz.muni.fi.pa165.sportactivitymanager.SportActivity;
@@ -79,7 +75,6 @@ public class SportActivityDAOImplTest {
         sa2.setId(Long.MIN_VALUE);
         try {
             sportActivityDao.delete(sa2);
-            em.getTransaction().commit();
             fail("Delete Activity is not exist in db");
         } catch (IllegalArgumentException ex) {
         }
@@ -125,13 +120,5 @@ public class SportActivityDAOImplTest {
         
         if (all.size() != 2)
             fail("findAll dont return all activities");
-    }
-      
-    
-
-
-
-
-        //TODO findTEST...
-    
+    }    
 }

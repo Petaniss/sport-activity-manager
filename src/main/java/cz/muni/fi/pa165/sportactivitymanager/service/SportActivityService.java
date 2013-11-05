@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Petaniss
+ * @author Petr Jelínek
  */
 public interface SportActivityService {
     /**
@@ -17,7 +17,6 @@ public interface SportActivityService {
      * 
      * @param sportActivity SportActivity that we store.
      * @throws NullPointerException when given sportActivity is NULL. 
-     * @return nothing.
      */
     void create(SportActivityDTO sportActivity);
     
@@ -44,26 +43,29 @@ public interface SportActivityService {
      * Delete existing SportActivity
      * 
      * @param sportActivity is a SportActivity that we want to delete.
-     * @throws IlleagalArgumentException when given SportActivity does not exist.
      * @throws NullPointerException when given sportActivity is NULL.
-     * @return nothing
      */
     void delete(SportActivityDTO sportActivity);
+    
+        /**
+     * Delete existing SportActivity by id
+     * 
+     * @param id is id of SportActivity that we want to delete.
+     * @throws NullPointerException when given sportActivity is NULL.
+     */
+    void delete(Long id);
     
     /**
      * Update existing sportActivity
      * 
      * @param sportActivity is a SportActivity that we want to update.
-     * @throws IlleagalArgumentException when given sportActivity does not exist.
      * @throws NullPointerException when given sportActivity is NULL.
-     * @return nothing
      */
     void update(SportActivityDTO sportActivity);
     
     /**
      * Find all existing SportActivity
      * 
-     * @param nothing
      * @return List of all SportActivity
      */
     List<SportActivityDTO> findAll();

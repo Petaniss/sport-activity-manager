@@ -22,6 +22,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class SportActivityServiceImpl implements SportActivityService {
+
+    public SportActivityServiceImpl() {
+    }
+
+    public SportActivityServiceImpl(SportActivityDAO sportDAO) {
+        this.sportDAO = sportDAO;
+    }
     
     private SportActivityDAO sportDAO;
 
@@ -108,6 +115,22 @@ public class SportActivityServiceImpl implements SportActivityService {
             }
         } else {
             throw new NullPointerException("SportActivity can not be null.");
+        }
+    }
+    
+    @Transactional
+    public void delete(Long id) {
+        if (id != null)
+        {
+            try {
+                sportDAO.delete(id);
+            }
+            catch(DataAccessException ex)
+            {
+                throw new DataAccException(ex.toString());
+            }
+        } else {
+            throw new NullPointerException("ID can not be null.");
         }
     }
 
