@@ -43,7 +43,16 @@ public interface CaloriesTableService
      * @throws  IlleagalArgumentException when given CaloriesTable does not exist.
      * @throws  NullPointerException when given caloriesTable is NULL.     
      */
-    void delete(CaloriesTableDTO caloriesTable);      
+    void delete(CaloriesTableDTO caloriesTable);
+    
+    /**
+     * Delete existing CaloriesTableDTO by id
+     * 
+     * @param id    is id of CaloriesTable that we want to delete.
+     * @throws NullPointerException when given sportActivity is NULL.
+     */
+    void delete(Long id);
+    
     
     /**
      * Finds all existing CaloriesTableDTO.
