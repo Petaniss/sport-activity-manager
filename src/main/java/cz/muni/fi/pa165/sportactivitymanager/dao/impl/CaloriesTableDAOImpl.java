@@ -70,6 +70,6 @@ public class CaloriesTableDAOImpl implements CaloriesTableDAO
     
     public List<CaloriesTable> findAll()    
     {
-        return em.createNativeQuery("findAll", CaloriesTable.class).getResultList();      
+        return em.createNamedQuery("findAllCaloriesTables", CaloriesTable.class).getResultList();      
     }   
 }

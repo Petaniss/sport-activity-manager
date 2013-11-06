@@ -22,6 +22,13 @@ public class CaloriesTableServiceImpl implements CaloriesTableService
 {
     private CaloriesTableDAO caloriesTableDAO;
     
+    public CaloriesTableServiceImpl() {}
+    
+    public CaloriesTableServiceImpl(CaloriesTableDAO caloriesTableDAO)
+    {
+        this.caloriesTableDAO = caloriesTableDAO;
+    }
+    
     public CaloriesTableDAO getDAO()                      { return caloriesTableDAO; }    
     public void setDAO(CaloriesTableDAO caloriesTableDAO) { this.caloriesTableDAO = caloriesTableDAO; }
        

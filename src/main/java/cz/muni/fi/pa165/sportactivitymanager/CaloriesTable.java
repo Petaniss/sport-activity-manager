@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "calories_table")
-//@NamedQuery(name = "findAll", query = "SELECT c FROM CaloriesTable c")
+@NamedQuery(name = "findAllCaloriesTables", query = "SELECT c FROM CaloriesTable c")
 public class CaloriesTable implements Serializable
 {
     @Id
