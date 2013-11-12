@@ -169,7 +169,7 @@ public class CaloriesTableDAOImplTest
         
     }
     
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testDeleteNull()
     {
         CaloriesTable ct = null;

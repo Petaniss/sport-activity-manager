@@ -79,7 +79,7 @@
     
     <!-- caloriesTableService -->
     <bean id="caloriesTableService" class="cz.muni.fi.pa165.sportactivitymanager.service.impl.CaloriesTableServiceImpl">
-        <property name="caloriesTableDAO" ref="tableDAO" />
+        <property name="DAO" ref="tableDAO" />
     </bean>
 
 
