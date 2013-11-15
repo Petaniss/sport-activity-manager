@@ -43,7 +43,7 @@ public class CaloriesTableServiceImpl implements CaloriesTableService
             caloriesTableDAO.create(caloriesTable);
             caloriesTableDTO.setId(caloriesTable.getId());
         } 
-        catch (DataAccessException ex) 
+        catch (Exception ex) 
         {
             throw new DataAccException(ex.toString());
         }
@@ -61,7 +61,7 @@ public class CaloriesTableServiceImpl implements CaloriesTableService
             CaloriesTable caloriesTable = caloriesTableDAO.get(id);
             caloriesTableDTO = CaloriesTableDTOChanger.entityToDTO(caloriesTable);
         } 
-        catch (DataAccessException ex) 
+        catch (Exception ex) 
         {
             throw new DataAccException(ex.toString());
         }
@@ -79,7 +79,7 @@ public class CaloriesTableServiceImpl implements CaloriesTableService
             CaloriesTable caloriesTable = CaloriesTableDTOChanger.dtoToEntity(caloriesTableDTO);
             caloriesTableDAO.update(caloriesTable);
         } 
-        catch (DataAccessException ex) 
+        catch (Exception ex) 
         {
             throw new DataAccException(ex.toString());
         }        
@@ -95,7 +95,7 @@ public class CaloriesTableServiceImpl implements CaloriesTableService
             CaloriesTable caloriesTable = CaloriesTableDTOChanger.dtoToEntity(caloriesTableDTO);
             caloriesTableDAO.delete(caloriesTable);
         } 
-        catch (DataAccessException ex) 
+        catch (Exception ex) 
         {
             throw new DataAccException(ex.toString());
         }
@@ -110,7 +110,7 @@ public class CaloriesTableServiceImpl implements CaloriesTableService
         {
             caloriesTableDAO.delete(id);
         } 
-        catch (DataAccessException ex) 
+        catch (Exception ex) 
         {
             throw new DataAccException(ex.toString());
         }
@@ -126,7 +126,7 @@ public class CaloriesTableServiceImpl implements CaloriesTableService
             List<CaloriesTable> caloriesTableList = caloriesTableDAO.findAll();
             caloriesTableDTOList = CaloriesTableDTOChanger.entityListToDTOList(caloriesTableList);
         } 
-        catch (DataAccessException ex) 
+        catch (Exception ex) 
         {
             throw new DataAccException(ex.toString());
         }        
