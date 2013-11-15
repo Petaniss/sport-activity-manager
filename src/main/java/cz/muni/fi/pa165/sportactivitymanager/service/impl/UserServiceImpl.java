@@ -8,7 +8,7 @@ import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTO;
 import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import cz.muni.fi.pa165.sportactivitymanager.dto.UserDTOChanger;
 import cz.muni.fi.pa165.sportactivitymanager.User;
-import cz.muni.fi.pa165.sportactivitymanager.DataAccException;
+//import cz.muni.fi.pa165.sportactivitymanager.DataAccException;
 import cz.muni.fi.pa165.sportactivitymanager.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +44,7 @@ public class UserServiceImpl implements UserService{
                     uDao.create(user);
                     userDto.setId(user.getId());
             }
-            catch(DataAccessException ex)
-                {
-                    throw new DataAccException(ex.toString());
+            catch(DataAccessException ex){                    
                 }
         }else{
             throw new NullPointerException("User can not be null.");
@@ -63,10 +61,8 @@ public class UserServiceImpl implements UserService{
                         User user = uDao.getByID(id);
                         userDto = UserDTOChanger.entityToDTO(user);
                 }
-                catch(DataAccessException ex)
-                    {
-                        throw new DataAccException(ex.toString());
-                    }
+                catch(DataAccessException ex){                    
+                }
         }else{ 
             throw new NullPointerException("User ID is Null");
         }
@@ -80,9 +76,7 @@ public class UserServiceImpl implements UserService{
                     User user = UserDTOChanger.dtoToUserEntity(userDto);
                     uDao.delete(user);
             }
-            catch(DataAccessException ex)
-                {
-                    throw new DataAccException(ex.toString());
+            catch(DataAccessException ex){                    
                 }
         }else{
             throw new NullPointerException("User can not be null.");
@@ -96,9 +90,7 @@ public class UserServiceImpl implements UserService{
                     User user = UserDTOChanger.dtoToUserEntity(userDto);
                     uDao.update(user);
             }
-            catch(DataAccessException ex)
-                {
-                    throw new DataAccException(ex.toString());
+            catch(DataAccessException ex){                    
                 }
         }else{
             throw new NullPointerException("User can not be null.");
@@ -112,9 +104,7 @@ public class UserServiceImpl implements UserService{
                     users = uDao.findAll();                    
                     usersDto = UserDTOChanger.entityListToDtoList(users);
             }
-            catch(DataAccessException ex)
-                {
-                    throw new DataAccException(ex.toString());
+            catch(DataAccessException ex){                    
                 }
             return usersDto;
     }

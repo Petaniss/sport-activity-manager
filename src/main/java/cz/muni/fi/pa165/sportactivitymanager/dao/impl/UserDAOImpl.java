@@ -9,13 +9,12 @@ import cz.muni.fi.pa165.sportactivitymanager.dao.UserDAO;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author Dobes Kuba
  * @version 2.0 - Spring: removed Transactions from methods and EntityManagerFactory. Replaced by Spring beans
- *                        added default constructor (empty)
+ *                        and added default constructor (empty)
  */
 public class UserDAOImpl implements UserDAO {
 

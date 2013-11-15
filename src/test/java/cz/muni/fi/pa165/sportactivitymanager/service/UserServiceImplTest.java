@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -155,8 +156,7 @@ public class UserServiceImplTest {
         
         uService.delete(UserDTOChanger.entityToDTO(user));
         verify(userMockDAO).delete(user);
-        
-        //overit jestli je seznam mensi o smazanej objekt??
+               
     }
     
     /**
